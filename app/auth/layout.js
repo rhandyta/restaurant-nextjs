@@ -7,8 +7,8 @@ export const metadata = {
 
 function LayoutAuth({ children }) {
     return (
-        <main className="bg-slate-50 min-h-screen flex items-center">
-            <div className="card md:card-side md:bg-base-100 sm:bg-slate-50 md:shadow-xl mx-auto w-full md:w-auto ">
+        <main className="min-h-screen flex items-center">
+            <div className="card md:card-side md:bg-base-100 md:shadow-xl mx-auto w-full md:w-auto ">
                 <figure>
                     <img
                         className="sm:hidden md:block"

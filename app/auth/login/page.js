@@ -28,10 +28,10 @@ function Login() {
                 </div>
                 <button className="btn mt-5">Login</button>
             </form>
-            <p className="mt-5 inline-block">
+            <p className="mt-5 inline-block font-thin text-sm">
                 don't have an account?
-                <span>
-                    <Link href="/register"> click here</Link>
+                <span className="hover:underline">
+                    <Link href="/register"> create now</Link>
                 </span>
             </p>
         </section>
