@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 export const metadata = {
@@ -7,16 +8,19 @@ export const metadata = {
 
 function LayoutAuth({ children }) {
     return (
-        <main className="min-h-screen flex items-center">
-            <div className="card md:card-side md:bg-base-100 md:shadow-xl mx-auto w-full md:w-auto ">
+        <main className="min-h-screen flex md:items-center">
+            <div className="card md:card-side md:bg-base-100 md:shadow-xl mx-auto w-full md:w-auto md:my-10">
                 <figure>
-                    <img
-                        className="sm:hidden md:block"
+                    <Image
+                        className="sm:hidden lg:block h-full bg-contain"
                         src="https://daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.jpg"
                         alt="Album"
+                        width={400}
+                        height={400}
+                        unoptimized
                     />
                 </figure>
-                <div className="card-body">{children}</div>
+                <div className="card-body max-w-[600px]">{children}</div>
             </div>
         </main>
     );
