@@ -1,25 +1,54 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
+import Input from "@/components/Input";
 
 function Register() {
+    const initialValues = {
+        firstname: "",
+        middlename: "",
+        lastname: "",
+        email: "",
+        telephone: "",
+        address: "",
+        password: "",
+    };
+
+    const validationSchema = yup.object({
+        firstname: yup.string().required(),
+        middlename: yup.string().required(),
+        lastname: yup.string().required(),
+        email: yup.string().required().email(),
+        telephone: yup.string().required(),
+        address: yup.string().required(),
+        password: yup.string().required().min(3),
+    });
+
+    const onSubmit = (values, props) => {
+        //
+    };
+
     return (
         <section className="h-96 md:h-auto w-full">
             <h6 className="font-semibold text-4xl text-center">Register</h6>
             <Formik>
                 {(props) => {
                     return (
-                        <Form onSubmit={onSubmit}>
-                            <form className="flex flex-wrap gap-1">
+                        <Form
+                            onSubmit={onSubmit}
+                            validationSchema={validationSchema}
+                            initialValues={initialValues}
+                        >
+                            <div className="flex flex-wrap gap-1">
                                 <div className="form-control w-full flex-1">
                                     <label className="label">
                                         <span className="label-text text-lg">
                                             Firstname
                                         </span>
                                     </label>
-                                    <input
+                                    <Input
                                         type="text"
                                         placeholder="Input your firstname"
                                         className="input input-bordered w-full"
@@ -31,7 +60,7 @@ function Register() {
                                             Lastname
                                         </span>
                                     </label>
-                                    <input
+                                    <Input
                                         type="text"
                                         placeholder="Input your lastname"
                                         className="input input-bordered w-full"
@@ -43,7 +72,7 @@ function Register() {
                                             Middlename (optional)
                                         </span>
                                     </label>
-                                    <input
+                                    <Input
                                         type="text"
                                         placeholder="Input your middlename"
                                         className="input input-bordered w-full"
@@ -55,7 +84,7 @@ function Register() {
                                             Email
                                         </span>
                                     </label>
-                                    <input
+                                    <Input
                                         type="email"
                                         placeholder="Input your email"
                                         className="input input-bordered w-full"
@@ -67,7 +96,7 @@ function Register() {
                                             Password
                                         </span>
                                     </label>
-                                    <input
+                                    <Input
                                         type="password"
                                         placeholder="Input your password"
                                         className="input input-bordered w-full"
@@ -79,7 +108,7 @@ function Register() {
                                             Telephone
                                         </span>
                                     </label>
-                                    <input
+                                    <Input
                                         type="text"
                                         placeholder="Input your telephone"
                                         className="input input-bordered w-full"
@@ -99,7 +128,7 @@ function Register() {
                                 <button className="btn mt-5 btn-block">
                                     Login
                                 </button>
-                            </form>
+                            </div>
                         </Form>
                     );
                 }}
