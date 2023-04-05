@@ -4,6 +4,8 @@ import Link from "next/link";
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as yup from "yup";
+import Label from "@/components/Label";
+import Button from "@/components/Button";
 
 function Login() {
     return (
@@ -11,9 +13,7 @@ function Login() {
             <h6 className="font-semibold text-4xl text-center">Login</h6>
             <form className="flex flex-wrap">
                 <div className="form-control w-full">
-                    <label className="label">
-                        <span className="label-text text-lg">Email</span>
-                    </label>
+                    <Label label="Email" />
                     <input
                         type="text"
                         placeholder="Input your email"
@@ -21,18 +21,16 @@ function Login() {
                     />
                 </div>
                 <div className="form-control w-full">
-                    <label className="label">
-                        <span className="label-text text-lg">Password</span>
-                    </label>
+                    <Label label="Password" />
                     <input
                         type="password"
                         placeholder="Input your password"
                         className="input input-bordered w-full"
                     />
                 </div>
-                <button className="btn mt-5">Login</button>
+                <Button text="Login" className="mt-5 btn-block btn-sm" />
             </form>
-            <p className="mt-5 inline-block font-thin text-sm">
+            <p className="mt-3 inline-block font-thin text-sm">
                 don't have an account?{" "}
                 <span className="hover:underline hover:text-blue-400">
                     <Link href="/auth/register">create now</Link>
