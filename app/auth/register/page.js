@@ -5,6 +5,7 @@ import { Formik, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Input from "@/components/Input";
 import Label from "@/components/Label";
+import Button from "@/components/Button";
 
 function Register() {
     const initialValues = {
@@ -42,7 +43,7 @@ function Register() {
                 {(props) => {
                     return (
                         <Form>
-                            <div className="flex flex-wrap gap-2">
+                            <div className="flex flex-wrap gap-x-2 gap-y-0">
                                 <div className="form-control w-full flex-1">
                                     <Label label="Firstname" />
                                     <Input
@@ -99,15 +100,16 @@ function Register() {
                                         placeholder="Address"
                                     ></textarea>
                                 </div>
-                                <button className="btn mt-5 btn-block">
-                                    Login
-                                </button>
+                                <Button
+                                    text="Register"
+                                    className="btn-block btn-sm mt-3"
+                                />
                             </div>
                         </Form>
                     );
                 }}
             </Formik>
-            <p className="mt-5 inline-block font-thin text-sm">
+            <p className="mt-3 inline-block font-thin text-sm">
                 already have an account?{" "}
                 <span className="hover:underline hover:text-blue-400">
                     <Link href="/auth/login">login now</Link>
