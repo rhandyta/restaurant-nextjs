@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as yup from "yup";
 import Input from "@/components/Input";
+import Label from "@/components/Label";
 
 function Register() {
     const initialValues = {
@@ -33,94 +34,67 @@ function Register() {
     return (
         <section className="h-96 md:h-auto w-full">
             <h6 className="font-semibold text-4xl text-center">Register</h6>
-            <Formik>
+            <Formik
+                initialValues={initialValues}
+                onSubmit={onSubmit}
+                validationSchema={validationSchema}
+            >
                 {(props) => {
                     return (
-                        <Form
-                            onSubmit={onSubmit}
-                            validationSchema={validationSchema}
-                            initialValues={initialValues}
-                        >
-                            <div className="flex flex-wrap gap-1">
+                        <Form>
+                            <div className="flex flex-wrap gap-2">
                                 <div className="form-control w-full flex-1">
-                                    <label className="label">
-                                        <span className="label-text text-lg">
-                                            Firstname
-                                        </span>
-                                    </label>
+                                    <Label label="Firstname" />
                                     <Input
                                         type="text"
+                                        name="firstname"
                                         placeholder="Input your firstname"
-                                        className="input input-bordered w-full"
                                     />
                                 </div>
                                 <div className="form-control w-full flex-1">
-                                    <label className="label">
-                                        <span className="label-text text-lg">
-                                            Lastname
-                                        </span>
-                                    </label>
+                                    <Label label="Lastname" />
                                     <Input
                                         type="text"
+                                        name="lastname"
                                         placeholder="Input your lastname"
-                                        className="input input-bordered w-full"
                                     />
                                 </div>
                                 <div className="form-control w-full">
-                                    <label className="label">
-                                        <span className="label-text text-lg">
-                                            Middlename (optional)
-                                        </span>
-                                    </label>
+                                    <Label label="Middlename" />
                                     <Input
                                         type="text"
+                                        name="middlename"
                                         placeholder="Input your middlename"
-                                        className="input input-bordered w-full"
                                     />
                                 </div>
                                 <div className="form-control w-full ">
-                                    <label className="label">
-                                        <span className="label-text text-lg">
-                                            Email
-                                        </span>
-                                    </label>
+                                    <Label label="Email" />
                                     <Input
                                         type="email"
+                                        name="email"
                                         placeholder="Input your email"
-                                        className="input input-bordered w-full"
                                     />
                                 </div>
                                 <div className="form-control w-full ">
-                                    <label className="label">
-                                        <span className="label-text text-lg">
-                                            Password
-                                        </span>
-                                    </label>
+                                    <Label label="Password" />
                                     <Input
                                         type="password"
+                                        name="password"
                                         placeholder="Input your password"
-                                        className="input input-bordered w-full"
                                     />
                                 </div>
                                 <div className="form-control w-full ">
-                                    <label className="label">
-                                        <span className="label-text text-lg">
-                                            Telephone
-                                        </span>
-                                    </label>
+                                    <Label label="Telephone" />
                                     <Input
                                         type="text"
+                                        name="telephone"
                                         placeholder="Input your telephone"
-                                        className="input input-bordered w-full"
                                     />
                                 </div>
                                 <div className="form-control w-full">
-                                    <label className="label">
-                                        <span className="label-text text-lg">
-                                            Address
-                                        </span>
-                                    </label>
+                                    <Label label="Address" />
                                     <textarea
+                                        name="address"
                                         className="textarea textarea-bordered"
                                         placeholder="Address"
                                     ></textarea>

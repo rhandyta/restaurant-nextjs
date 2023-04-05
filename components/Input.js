@@ -1,10 +1,14 @@
 import React from "react";
 import { Field } from "formik";
 
-function Input({ type = "text", ...props }) {
+const Input = ({ type = "text", className = "", ...props }) => {
     return (
-        <Field type={type} className="input input-bordered w-full" {...props} />
+        <Field
+            className={`input input-bordered input-sm w-full ${className}`}
+            type={type}
+            {...props}
+        />
     );
-}
+};
 
 export default Input;
