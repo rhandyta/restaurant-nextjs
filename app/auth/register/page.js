@@ -1,13 +1,17 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { Formik, Form, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage, Field } from "formik";
 import * as yup from "yup";
 import Input from "@/components/Input";
 import Label from "@/components/Label";
 import Button from "@/components/Button";
+import TextArea from "@/components/TextArea";
+import useRegister from "./useRegister";
 
 function Register() {
+    const [isFetch, seIsFetch] = useState("");
+
     const initialValues = {
         firstname: "",
         middlename: "",
@@ -28,8 +32,13 @@ function Register() {
         password: yup.string().required().min(3),
     });
 
-    const onSubmit = (values, props) => {
-        //
+    const onSubmit = async (values, props) => {
+        try {
+            const result = await useRegister(values);
+            console.log("ini result = >", result);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
@@ -94,13 +103,14 @@ function Register() {
                                 </div>
                                 <div className="form-control w-full">
                                     <Label label="Address" />
-                                    <textarea
-                                        name="address"
-                                        className="textarea textarea-bordered"
+                                    <TextArea
+                                        as="textarea"
                                         placeholder="Address"
-                                    ></textarea>
+                                        name="address"
+                                    />
                                 </div>
                                 <Button
+                                    type="submit"
                                     text="Register"
                                     className="btn-block btn-sm mt-3"
                                 />
