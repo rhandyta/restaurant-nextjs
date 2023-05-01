@@ -8,6 +8,7 @@ import Label from "@/components/Label";
 import Button from "@/components/Button";
 import TextArea from "@/components/TextArea";
 import useRegister from "./useRegister";
+import { toastSuccess } from "@/components/Toast";
 
 function Register() {
     const [isFetch, seIsFetch] = useState("");
@@ -36,6 +37,7 @@ function Register() {
         try {
             const result = await useRegister(values);
             console.log("ini result = >", result);
+            toastSuccess("ok");
         } catch (error) {
             console.log(error);
         }
