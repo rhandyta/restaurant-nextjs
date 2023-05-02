@@ -8,11 +8,12 @@ import Label from "@/components/Label";
 import Button from "@/components/Button";
 import TextArea from "@/components/TextArea";
 import useRegister from "./useRegister";
-import { toastSuccess } from "@/components/Toast";
 import ButtonLoading from "@/components/ButtonLoading";
+import { useRouter } from "next/navigation";
 
 function Register() {
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
 
     const initialValues = {
         firstname: "",
@@ -26,7 +27,7 @@ function Register() {
 
     const validationSchema = yup.object({
         firstname: yup.string().required(),
-        middlename: yup.string().required(),
+        middlename: yup.string(),
         lastname: yup.string().required(),
         email: yup.string().required().email(),
         telephone: yup.string().required(),
@@ -34,8 +35,13 @@ function Register() {
         password: yup.string().required().min(3),
     });
 
-    const onSubmit = (values, props) => {
-        useRegister(values, setIsLoading);
+    const onSubmit = async (values, props) => {
+        const result = await useRegister(values, setIsLoading);
+        if (!result) return false;
+        props.resetForm({ values: "" });
+        setTimeout(() => {
+            router.push("/auth/login");
+        }, 3000);
     };
 
     return (
