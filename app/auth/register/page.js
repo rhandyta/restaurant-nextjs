@@ -9,9 +9,10 @@ import Button from "@/components/Button";
 import TextArea from "@/components/TextArea";
 import useRegister from "./useRegister";
 import { toastSuccess } from "@/components/Toast";
+import ButtonLoading from "@/components/ButtonLoading";
 
 function Register() {
-    const [isFetch, seIsFetch] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const initialValues = {
         firstname: "",
@@ -33,14 +34,8 @@ function Register() {
         password: yup.string().required().min(3),
     });
 
-    const onSubmit = async (values, props) => {
-        try {
-            const result = await useRegister(values);
-            console.log("ini result = >", result);
-            toastSuccess("ok");
-        } catch (error) {
-            console.log(error);
-        }
+    const onSubmit = (values, props) => {
+        useRegister(values, setIsLoading);
     };
 
     return (
@@ -111,11 +106,15 @@ function Register() {
                                         name="address"
                                     />
                                 </div>
-                                <Button
-                                    type="submit"
-                                    text="Register"
-                                    className="btn-block btn-sm mt-3"
-                                />
+                                {isLoading === true ? (
+                                    <ButtonLoading className="btn-block btn-sm mt-3" />
+                                ) : (
+                                    <Button
+                                        type="submit"
+                                        text="Register"
+                                        className="btn-block btn-sm mt-3"
+                                    />
+                                )}
                             </div>
                         </Form>
                     );
