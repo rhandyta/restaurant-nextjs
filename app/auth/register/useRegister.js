@@ -16,7 +16,7 @@ const useRegister = async (values, setIsLoading) => {
         );
         const response = await request.json();
         if (response.status_code === 409) {
-            throw new Error(`${response.messages}`);
+            throw new Error(response.messages);
         } else if (response.status_code !== 201) {
             throw new Error("Something went wrong!");
         }

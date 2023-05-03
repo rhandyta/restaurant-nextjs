@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { Formik, Form, ErrorMessage, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as yup from "yup";
 import Input from "@/components/Input";
 import Label from "@/components/Label";
@@ -10,6 +10,7 @@ import TextArea from "@/components/TextArea";
 import useRegister from "./useRegister";
 import ButtonLoading from "@/components/ButtonLoading";
 import { useRouter } from "next/navigation";
+import ErrorMessageField from "@/components/ErrorMessageField";
 
 function Register() {
     const [isLoading, setIsLoading] = useState(false);
@@ -63,6 +64,7 @@ function Register() {
                                         name="firstname"
                                         placeholder="Input your firstname"
                                     />
+                                    <ErrorMessageField name="firstname" />
                                 </div>
                                 <div className="form-control w-full flex-1">
                                     <Label label="Lastname" />
@@ -71,6 +73,7 @@ function Register() {
                                         name="lastname"
                                         placeholder="Input your lastname"
                                     />
+                                    <ErrorMessageField name="lastname" />
                                 </div>
                                 <div className="form-control w-full">
                                     <Label label="Middlename" />
@@ -79,6 +82,7 @@ function Register() {
                                         name="middlename"
                                         placeholder="Input your middlename"
                                     />
+                                    <ErrorMessageField name="middlename" />
                                 </div>
                                 <div className="form-control w-full ">
                                     <Label label="Email" />
@@ -87,6 +91,7 @@ function Register() {
                                         name="email"
                                         placeholder="Input your email"
                                     />
+                                    <ErrorMessageField name="email" />
                                 </div>
                                 <div className="form-control w-full ">
                                     <Label label="Password" />
@@ -95,6 +100,7 @@ function Register() {
                                         name="password"
                                         placeholder="Input your password"
                                     />
+                                    <ErrorMessageField name="password" />
                                 </div>
                                 <div className="form-control w-full ">
                                     <Label label="Telephone" />
@@ -102,7 +108,8 @@ function Register() {
                                         type="text"
                                         name="telephone"
                                         placeholder="Input your telephone"
-                                    />
+                                    />{" "}
+                                    <ErrorMessageField name="telephone" />
                                 </div>
                                 <div className="form-control w-full">
                                     <Label label="Address" />
@@ -111,6 +118,7 @@ function Register() {
                                         placeholder="Address"
                                         name="address"
                                     />
+                                    <ErrorMessageField name="address" />
                                 </div>
                                 {isLoading === true ? (
                                     <ButtonLoading className="btn-block btn-sm mt-3" />
