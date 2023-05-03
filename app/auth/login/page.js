@@ -1,13 +1,18 @@
 "use client";
 import Link from "next/link";
-import React from "react";
-import { Formik, Form, ErrorMessage } from "formik";
+import React, { useState } from "react";
+import { Formik, Form } from "formik";
 import * as yup from "yup";
 import Label from "@/components/Label";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import ButtonLoading from "@/components/ButtonLoading";
+import useLogin from "./useLogin";
+import ErrorMessageField from "@/components/ErrorMessageField";
 
 function Login() {
+    const [isLoading, setIsLoading] = useState(false);
+
     const initialValues = {
         email: "",
         password: "",
@@ -19,7 +24,7 @@ function Login() {
     });
 
     const onSubmit = (values, props) => {
-        //
+        useLogin(values, setIsLoading);
     };
     return (
         <section className="h-96 md:h-auto">
@@ -40,6 +45,7 @@ function Login() {
                                     name="email"
                                     className="input input-bordered w-full"
                                 />
+                                <ErrorMessageField name="email" />
                             </div>
                             <div className="form-control w-full">
                                 <Label label="Password" />
@@ -49,18 +55,24 @@ function Login() {
                                     placeholder="Input your password"
                                     className="input input-bordered w-full"
                                 />
+                                <ErrorMessageField name="password" />
                             </div>
-                            <Button
-                                text="Login"
-                                className="mt-5 btn-block btn-sm"
-                            />
+                            {isLoading ? (
+                                <ButtonLoading className="btn-sm mt-3 btn-block" />
+                            ) : (
+                                <Button
+                                    text="Login"
+                                    type="submit"
+                                    className="mt-3 btn-block btn-sm"
+                                />
+                            )}
                         </Form>
                     );
                 }}
             </Formik>
             <p className="mt-3 inline-block font-thin text-sm">
                 don't have an account?{" "}
-                <span className="hover:underline hover:text-blue-400">
+                <span className="text-blue-600 hover:underline hover:text-blue-400">
                     <Link href="/auth/register">create now</Link>
                 </span>
             </p>

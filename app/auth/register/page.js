@@ -136,7 +136,7 @@ function Register() {
             </Formik>
             <p className="mt-3 inline-block font-thin text-sm">
                 already have an account?{" "}
-                <span className="hover:underline hover:text-blue-400">
+                <span className="text-blue-600 hover:underline hover:text-blue-400">
                     <Link href="/auth/login">login now</Link>
                 </span>
             </p>
