@@ -9,9 +9,12 @@ import Input from "@/components/Input";
 import ButtonLoading from "@/components/ButtonLoading";
 import useLogin from "./useLogin";
 import ErrorMessageField from "@/components/ErrorMessageField";
+import { useRouter } from "next/navigation";
 
 function Login() {
     const [isLoading, setIsLoading] = useState(false);
+
+    const router = useRouter();
 
     const initialValues = {
         email: "",
@@ -23,8 +26,12 @@ function Login() {
         password: yup.string().required().min(3),
     });
 
-    const onSubmit = (values, props) => {
-        useLogin(values, setIsLoading);
+    const onSubmit = async (values, props) => {
+        const result = await useLogin(values, setIsLoading);
+        console.log(result);
+        if (!result) return false;
+        await props.resetForm({ values: "" });
+        router.push("/");
     };
     return (
         <section className="h-96 md:h-auto">

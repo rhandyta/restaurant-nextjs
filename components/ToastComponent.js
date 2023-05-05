@@ -1,7 +1,12 @@
+"use client";
 import { toast, ToastContainer } from "react-toastify";
 import React from "react";
 
-function Toast() {
+export default function ToastComponent() {
+    return <Toast />;
+}
+
+export function Toast() {
     return (
         <ToastContainer
             position="top-right"
@@ -43,5 +48,3 @@ export const toastError = (message) => {
         theme: "light",
     });
 };
-
-export default Toast;

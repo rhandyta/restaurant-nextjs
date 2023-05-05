@@ -40,9 +40,7 @@ function Register() {
         const result = await useRegister(values, setIsLoading);
         if (!result) return false;
         props.resetForm({ values: "" });
-        setTimeout(() => {
-            router.push("/auth/login");
-        }, 3000);
+        router.push("/auth/login");
     };
 
     return (

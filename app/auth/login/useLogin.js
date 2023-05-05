@@ -1,4 +1,4 @@
-import { toastError, toastSuccess } from "@/components/Toast";
+import { toastError, toastSuccess } from "@/components/ToastComponent";
 
 const useLogin = async (values, setIsLoading) => {
     try {

@@ -1,5 +1,3 @@
-"use client";
-import Toast from "@/components/Toast";
 import Image from "next/image";
 import React from "react";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,7 +10,6 @@ export const metadata = {
 function LayoutAuth({ children }) {
     return (
         <main className="min-h-screen flex md:items-center">
-            <Toast />
             <div className="card md:card-side md:bg-base-100 md:shadow-xl mx-auto w-full md:w-auto md:my-10">
                 <figure>
                     <Image
