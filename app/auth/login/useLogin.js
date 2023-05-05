@@ -1,4 +1,5 @@
 import { toastError, toastSuccess } from "@/components/ToastComponent";
+import { useLoginUser } from "@/hooks/useUser";
 
 const useLogin = async (values, setIsLoading) => {
     try {
@@ -20,7 +21,7 @@ const useLogin = async (values, setIsLoading) => {
         } else if (response.status_code !== 200) {
             throw new Error("Something went wrong!");
         }
-        console.log(response);
+        useLoginUser(response.user, response.token);
         toastSuccess(response.messages);
         setIsLoading(false);
         return true;

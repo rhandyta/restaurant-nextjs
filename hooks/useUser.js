@@ -1,7 +1,18 @@
-import React from "react";
+import CryptoJS from "crypto-js";
 
-function useUser() {
-    return <div>useUser</div>;
-}
+export const useLoginUser = (user, token) => {
+    const encryptedUser = CryptoJS.AES.encrypt(
+        JSON.stringify(user),
+        "user"
+    ).toString();
+    const encryptedToken = CryptoJS.AES.encrypt(token, "token").toString();
+    localStorage.setItem(
+        "auth",
+        JSON.stringify({ user: encryptedUser, token: encryptedToken })
+    );
+};
 
-export default useUser;
+export const useGetUser = () => {
+    const getUserLocalStorage = localStorage.getItem("auth");
+    return getUserLocalStorage;
+};
