@@ -1,19 +1,18 @@
 "use client";
 import { useUserContext } from "@/context/user-context";
+import { useGetUser, useSetUser } from "@/hooks/useUser";
+import { useEffect } from "react";
 
 function page() {
-    const data = useUserContext();
-    console.log(data);
+    const { user, setUser, token, setToken } = useUserContext();
+    const data = useGetUser();
+    useEffect(() => {
+        setUser(JSON.parse(data.decryptedUserJsonString));
+        setToken(data.decryptedTokenJsonString);
+    }, []);
     return (
         <>
-            <h1>{data.user?.firstname}</h1>
-            <button
-                onClick={() =>
-                    data.setUser({ ...data.user, firstname: "anjay" })
-                }
-            >
-                Clicked
-            </button>
+            <h1>{user?.firstname}</h1>
         </>
     );
 }

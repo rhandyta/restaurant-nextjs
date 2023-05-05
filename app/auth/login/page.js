@@ -28,10 +28,9 @@ function Login() {
 
     const onSubmit = async (values, props) => {
         const result = await useLogin(values, setIsLoading);
-        console.log(result);
         if (!result) return false;
         await props.resetForm({ values: "" });
-        router.push("/");
+        router.push("/home");
     };
     return (
         <section className="h-96 md:h-auto">
