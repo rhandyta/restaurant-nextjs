@@ -1,6 +1,6 @@
 import { toastError, toastSuccess } from "@/components/ToastComponent";
 import { useSetCookieUser } from "@/hooks/useCookieUser";
-import { useSetUser } from "@/hooks/useUser";
+import { useSetUser } from "@/hooks/useLocalStorageUser";
 
 const useLogin = async (values, setIsLoading) => {
     try {
@@ -22,7 +22,6 @@ const useLogin = async (values, setIsLoading) => {
         } else if (response.status_code !== 200) {
             throw new Error("Something went wrong!");
         }
-        useSetUser(response.user, response.token);
         useSetCookieUser(response.user, response.token);
         toastSuccess(response.messages);
         setIsLoading(false);
