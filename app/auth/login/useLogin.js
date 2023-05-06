@@ -1,4 +1,5 @@
 import { toastError, toastSuccess } from "@/components/ToastComponent";
+import { useSetCookieUser } from "@/hooks/useCookieUser";
 import { useSetUser } from "@/hooks/useUser";
 
 const useLogin = async (values, setIsLoading) => {
@@ -22,6 +23,7 @@ const useLogin = async (values, setIsLoading) => {
             throw new Error("Something went wrong!");
         }
         useSetUser(response.user, response.token);
+        useSetCookieUser(response.user, response.token);
         toastSuccess(response.messages);
         setIsLoading(false);
         return true;

@@ -1,6 +1,6 @@
 "use client";
 import { useUserContext } from "@/context/user-context";
-import { useGetUser, useSetUser } from "@/hooks/useUser";
+import { useGetUser } from "@/hooks/useUser";
 import { useEffect } from "react";
 
 function page() {

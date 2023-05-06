@@ -1,7 +1,6 @@
 "use client";
 
-import { useGetUser } from "@/hooks/useUser";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 export const UserContext = createContext({});
 
