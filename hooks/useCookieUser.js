@@ -28,10 +28,9 @@ export const useSetCookieUser = async (user, token) => {
 };
 
 export const useGetCookieUser = () => {
-    if (Cookies.get("token") && Cookies.get("user")) {
-        const getTokenCookies = Cookies.get("token");
-        const getUserCookies = Cookies.get("user");
-
+    const getTokenCookies = Cookies.get("token");
+    const getUserCookies = Cookies.get("user");
+    if (getTokenCookies && getUserCookies) {
         const decryptedUserBytes = CryptoJS.AES.decrypt(getUserCookies, "user");
         const decryptedUserJsonString = decryptedUserBytes.toString(
             CryptoJS.enc.Utf8

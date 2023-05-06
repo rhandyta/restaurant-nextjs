@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
@@ -11,10 +11,12 @@ import useRegister from "./useRegister";
 import ButtonLoading from "@/components/ButtonLoading";
 import { useRouter } from "next/navigation";
 import ErrorMessageField from "@/components/ErrorMessageField";
+import { useGetCookieUser } from "@/hooks/useCookieUser";
 
 function Register() {
-    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
+    const data = useGetCookieUser();
+    const [isLoading, setIsLoading] = useState(false);
 
     const initialValues = {
         firstname: "",
@@ -42,6 +44,10 @@ function Register() {
         props.resetForm({ values: "" });
         router.push("/auth/login");
     };
+
+    useEffect(() => {
+        if (data !== null) return router.push("/home");
+    }, []);
 
     return (
         <section className="h-96 md:h-auto w-full">
