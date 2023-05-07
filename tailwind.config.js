@@ -24,21 +24,21 @@ module.exports = {
     plugins: [require("daisyui")],
     daisyui: {
         themes: [
-            {
-                mytheme: {
-                    primary: "#e11d48",
-                    secondary: "#fecdd3",
-                    accent: "#6b7280",
-                    neutral: "#1f2937",
-                    "base-100": "#FFF",
-                    info: "#3ABFF8",
-                    success: "#36D399",
-                    warning: "#FBBD23",
-                    error: "#F87272",
-                },
-            },
-            "night",
             "light",
+            "night",
+            // {
+            //     mytheme: {
+            //         primary: "#e11d48",
+            //         secondary: "#fecdd3",
+            //         accent: "#6b7280",
+            //         neutral: "#1f2937",
+            //         "base-100": "#FFF",
+            //         info: "#0CA5E9",
+            //         success: "#2DD4BF",
+            //         warning: "#F4BF50",
+            //         error: "#FB7085",
+            //     },
+            // },
         ],
     },
 };
