@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-function Navbar() {
+function Header() {
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -93,7 +93,7 @@ function Navbar() {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link href="/auth/login" className="btn">
+                <Link href="/auth/login" className="btn bg-base">
                     Login
                 </Link>
             </div>
@@ -101,4 +101,4 @@ function Navbar() {
     );
 }
 
-export default Navbar;
+export default Header;

@@ -14,7 +14,7 @@ export function UserContextProvider({ children }) {
     const data = useGetCookieUser();
 
     useEffect(() => {
-        if (data === null) return Router.push("/auth/login");
+        // if (data === null) return Router.push("/auth/login");
     }, []);
 
     const userContextValue = {
