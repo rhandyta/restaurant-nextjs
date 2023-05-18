@@ -3,7 +3,7 @@ import React from "react";
 
 function Header() {
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -92,9 +92,18 @@ function Header() {
                     </li>
                 </ul>
             </div>
-            <div className="navbar-end">
-                <Link href="/auth/login" className="btn bg-base">
+            <div className="navbar-end space-x-2">
+                <Link
+                    href="/auth/login"
+                    className="btn bg-transparent text-rose-600 border-0 hover:bg-slate-300"
+                >
                     Login
+                </Link>
+                <Link
+                    href="/auth/register"
+                    className="btn bg-transparent text-rose-600 border-1 border-red-400 rounded-3xl hover:bg-slate-300"
+                >
+                    Sign Up
                 </Link>
             </div>
         </div>
