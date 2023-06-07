@@ -10,6 +10,7 @@ function CardBestCategory() {
                     src="/images/svg/hamburger.svg"
                     width={300}
                     height={300}
+                    alt="hamburger"
                 />
             </figure>
             <h6 className="font-bold text-2xl leading-3 mt-6">
@@ -23,6 +24,7 @@ function CardBestCategory() {
                             src="/images/svg/arrow-up.svg"
                             width={12}
                             height={12}
+                            alt="arrow"
                         />
                     </span>
                 </p>
