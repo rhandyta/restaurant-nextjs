@@ -1,10 +1,7 @@
-"use client";
-import userInterceptor from "@/utils/userInterceptor";
-import Image from "next/image";
 import Link from "next/link";
+import SwitchCartAuth from "./SwitchCartAuth";
 
 function Header() {
-    const getDataUser = userInterceptor();
     return (
         <div className="navbar">
             <div className="navbar-start">
@@ -96,32 +93,7 @@ function Header() {
                 </ul>
             </div>
             <div className="navbar-end space-x-2">
-                {!getDataUser.user && (
-                    <>
-                        <Link
-                            href="/auth/login"
-                            className="btn bg-transparent text-rose-600 border-0 hover:bg-slate-300"
-                        >
-                            Login
-                        </Link>
-                        <Link
-                            href="/auth/register"
-                            className="btn bg-transparent text-rose-600 border-1 border-red-400 rounded-3xl hover:bg-slate-300"
-                        >
-                            Sign Up
-                        </Link>
-                    </>
-                )}
-                {getDataUser.user && (
-                    <Link href="#">
-                        <Image
-                            src="/images/svg/basket.svg"
-                            width={35}
-                            height={35}
-                            alt="basket"
-                        />
-                    </Link>
-                )}
+                <SwitchCartAuth />
             </div>
         </div>
     );

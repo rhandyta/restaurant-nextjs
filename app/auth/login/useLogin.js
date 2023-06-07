@@ -1,6 +1,5 @@
 import { toastError, toastSuccess } from "@/components/ToastComponent";
 import { useSetCookieUser } from "@/hooks/useCookieUser";
-import { useSetUser } from "@/hooks/useLocalStorageUser";
 
 const useLogin = async (values, setIsLoading) => {
     try {

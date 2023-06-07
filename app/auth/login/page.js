@@ -31,11 +31,11 @@ function Login() {
         const result = await useLogin(values, setIsLoading);
         if (!result) return false;
         await props.resetForm({ values: "" });
-        router.push("/home");
+        router.push("/");
     };
 
     useEffect(() => {
-        if (data !== null) return router.push("/home");
+        // if (data !== null) return router.push("/home");
     }, []);
     return (
         <section className="h-96 md:h-auto">

@@ -2,7 +2,7 @@
 
 import { useGetCookieUser } from "@/hooks/useCookieUser";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export const UserContext = createContext({});
 
@@ -11,11 +11,15 @@ export function UserContextProvider({ children }) {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
 
-    const data = useGetCookieUser();
+    // const data = useGetCookieUser();
 
-    useEffect(() => {
-        // if (data === null) return Router.push("/auth/login");
-    }, []);
+    // useEffect(() => {
+    //     if (data !== null) {
+    //         setUser(JSON.parse(data.decryptedUserJsonString));
+    //         setToken(data.decryptedTokenJsonString);
+    //     }
+    //     console.log("first");
+    // }, []);
 
     const userContextValue = {
         user,
