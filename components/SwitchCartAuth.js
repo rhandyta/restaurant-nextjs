@@ -33,7 +33,7 @@ function SwitchCartAuth() {
                 </>
             )}
             {user && (
-                <Link href="#">
+                <Link href="/cart">
                     <Image
                         src="/images/svg/basket.svg"
                         width={35}

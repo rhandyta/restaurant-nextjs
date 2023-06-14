@@ -3,7 +3,7 @@ import Button from "./Button";
 
 function HeroSection() {
     return (
-        <section className="hero">
+        <section className="hero bg-rose-100">
             <div className="hero-content w-full flex-col lg:flex-row items-start justify-between my-5">
                 <div className="flex flex-col gap-10">
                     <h5 className="text-5xl font-bold text-red-500 leading-snug">
