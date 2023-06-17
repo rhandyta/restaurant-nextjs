@@ -1,8 +1,8 @@
 import ToastComponent from "@/components/ToastComponent";
-import Header from "@/components/header";
 
 import { UserContextProvider } from "@/context/user-context";
 import "./globals.css";
+import Header from "@/components/Header";
 export const metadata = {
     title: "Restaurant Cepat Saji",
     description: "Hello World",
@@ -13,13 +13,8 @@ export default function RootLayout({ children }) {
         <html lang="en" data-theme="light">
             <body>
                 <UserContextProvider>
-                    <main>
-                        <ToastComponent />
-                        <div className="bg-rose-100 px-20 w-full m-0">
-                            <Header />
-                        </div>
-                        {children}
-                    </main>
+                    <ToastComponent />
+                    {children}
                 </UserContextProvider>
             </body>
         </html>

@@ -3,7 +3,7 @@ import SwitchCartAuth from "./SwitchCartAuth";
 
 function Header() {
     return (
-        <nav className="navbar">
+        <nav className="navbar p-0">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -56,7 +56,10 @@ function Header() {
                         </li>
                     </ul>
                 </div>
-                <Link href="#" className="btn btn-ghost normal-case text-xl">
+                <Link
+                    href="#"
+                    className="btn btn-ghost normal-case text-xl p-0"
+                >
                     Restaurant
                 </Link>
             </div>
