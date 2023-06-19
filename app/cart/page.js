@@ -79,7 +79,19 @@ function Cart() {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>2</td>
+                                        <td>
+                                            <div className="flex gap-1 items-center">
+                                                <Button
+                                                    text="-"
+                                                    className="btn-sm"
+                                                />
+                                                <span>2</span>
+                                                <Button
+                                                    text="+"
+                                                    className="btn-sm"
+                                                />
+                                            </div>
+                                        </td>
                                         <td>$10.00</td>
                                         <th>
                                             <div className="flex flex-wrap">
