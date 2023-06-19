@@ -6,8 +6,8 @@ export default function Home() {
         <main>
             <div className="bg-rose-100 px-20 w-full m-0">
                 <Header />
-                <LandingPage />
             </div>
+            <LandingPage />
         </main>
     );
 }
