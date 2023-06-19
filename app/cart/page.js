@@ -95,49 +95,19 @@ function Cart() {
                                         <td>$10.00</td>
                                         <th>
                                             <div className="flex flex-wrap">
-                                                <div className="flex gap-1">
-                                                    <ButtonIcon className="btn-sm bg-rose-600 border-none">
-                                                        Wishlist
-                                                        <Image
-                                                            src="/images/svg/love.svg"
-                                                            alt="Wishlist"
-                                                            width={28}
-                                                            height={28}
-                                                        />
-                                                    </ButtonIcon>
-                                                    <ButtonIcon className="btn-sm bg-rose-600 border-none">
-                                                        Remove
-                                                        <Image
-                                                            src="/images/svg/trash.svg"
-                                                            alt="Wishlist"
-                                                            width={28}
-                                                            height={28}
-                                                        />
-                                                    </ButtonIcon>
-                                                </div>
+                                                <ButtonIcon className="btn-sm bg-rose-600 border-none">
+                                                    Remove
+                                                    <Image
+                                                        src="/images/svg/trash.svg"
+                                                        alt="Wishlist"
+                                                        width={28}
+                                                        height={28}
+                                                    />
+                                                </ButtonIcon>
                                             </div>
                                         </th>
                                     </tr>
                                 </tbody>
-                                {/* foot */}
-                                <tfoot>
-                                    <tr>
-                                        <th className="bg-rose-200 rounded-none">
-                                            <label>
-                                                <input
-                                                    type="checkbox"
-                                                    className="checkbox"
-                                                />
-                                            </label>
-                                        </th>
-                                        <th className="bg-rose-200">Product</th>
-                                        <th className="bg-rose-200">
-                                            Quantity
-                                        </th>
-                                        <th className="bg-rose-200">Price</th>
-                                        <th className="bg-rose-200 rounded-none"></th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -155,7 +125,7 @@ function Cart() {
                                             <>
                                                 <Input
                                                     name="coupon"
-                                                    className="border border-slate-600 w-[80%] p-1"
+                                                    className="border-none rounded-none w-[80%] p-1 focus:outline-none focus:ring-1 focus:ring-rose-400"
                                                     placeholder="Coupon Code"
                                                 />
                                                 <Button
