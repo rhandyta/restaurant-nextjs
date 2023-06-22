@@ -6,8 +6,36 @@ import { Formik } from "formik";
 import Input from "@/components/Input";
 import Label from "@/components/Label";
 import Button from "@/components/Button";
+import * as yup from "yup";
 
 function page() {
+    const initialValues = {
+        payment_type: "",
+        bank: "",
+        notes: "",
+        table: "",
+        detail_orders: [],
+    };
+
+    const validationSchema = yup.object({
+        payment_type: yup.string().required(),
+        bank: yup.string().required(),
+        table: yup.string().min(3),
+        notes: yup.string().min(3).nullable(),
+        detail_orders: yup.array().of(
+            yup.object().shape({
+                product: yup.string().required(),
+                quantity: yup.number().required(),
+                unit_price: yup.number().required(),
+                discount: yup.number().required(),
+            })
+        ),
+    });
+
+    const onSubmit = (values, props) => {
+        //
+    };
+
     return (
         <main>
             <div className="bg-rose-100 px-20 w-full m-0">
@@ -102,7 +130,11 @@ function page() {
                                 <span className="text-xs">Pay Cash</span>
                             </ButtonIcon>
                         </div>
-                        <Formik>
+                        <Formik
+                            initialValues={initialValues}
+                            validationSchema={validationSchema}
+                            onSubmit={onSubmit}
+                        >
                             {(props) => {
                                 return (
                                     <div className="w-full h-full flex gap-x-10">
@@ -146,14 +178,6 @@ function page() {
                                                         Pay
                                                     </span>
                                                 </Button>
-                                                {/* <Button
-                                                    className="btn-sm bg-rose-800 rounded-none"
-                                                    text="Rp.28.0000"
-                                                />
-                                                <Button
-                                                    className="btn-sm rounded-none"
-                                                    text="Pay"
-                                                /> */}
                                             </div>
                                         </div>
                                     </div>
