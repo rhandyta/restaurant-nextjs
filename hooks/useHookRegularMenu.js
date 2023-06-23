@@ -1,7 +1,7 @@
-export const useGetBestCategory = async () => {
+export const useGetRegularMenu = async () => {
     try {
         const request = await fetch(
-            `${process.env.NEXT_PUBLIC_API_HOST}top-selling`,
+            `${process.env.NEXT_PUBLIC_API_HOST}regular-menu`,
             {
                 method: "GET",
                 headers: {
@@ -15,7 +15,7 @@ export const useGetBestCategory = async () => {
         if (response.status_code !== 200) {
             throw new Error("Something went wrong!");
         }
-        return response.data;
+        return response.data; // Mengembalikan hasil respons
     } catch (error) {
         throw error;
     }

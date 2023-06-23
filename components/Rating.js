@@ -1,32 +1,42 @@
 import React from "react";
 
-function Rating() {
+function Rating({ rating }) {
     return (
         <div className="rating rating-sm">
             <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star bg-orange-400"
+                className={`mask mask-star  ${
+                    rating >= 1 ? "bg-orange-400" : ""
+                }`}
             />
             <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star bg-orange-400"
+                className={`mask mask-star  ${
+                    rating >= 2 ? "bg-orange-400" : ""
+                }`}
             />
             <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star bg-orange-400"
+                className={`mask mask-star  ${
+                    rating >= 3 ? "bg-orange-400" : ""
+                }`}
             />
             <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star bg-orange-400"
+                className={`mask mask-star  ${
+                    rating >= 4 ? "bg-orange-400" : ""
+                }`}
             />
             <input
                 type="radio"
                 name="rating-1"
-                className="mask mask-star bg-orange-400"
+                className={`mask mask-star  ${
+                    rating >= 5 ? "bg-orange-400" : ""
+                }`}
             />
         </div>
     );

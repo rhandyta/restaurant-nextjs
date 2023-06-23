@@ -3,7 +3,6 @@ import Link from "next/link";
 import React from "react";
 
 function CardBestCategory({ product_id, foodlist }) {
-    console.log({ product_id, foodlist });
     return (
         <div className="flex flex-col justify-center items-center">
             <figure>

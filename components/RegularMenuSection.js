@@ -1,8 +1,21 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import Card from "./Card";
+import { useGetRegularMenu } from "@/hooks/useHookRegularMenu";
 
 function RegularMenuSection() {
+    const [regularMenus, setRegularMenus] = useState([]);
+    useEffect(() => {
+        useGetRegularMenu()
+            .then((res) => {
+                setRegularMenus(res);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+    console.log(regularMenus);
     return (
         <section className="pt-20 px-20 pb-96">
             <div>
@@ -22,12 +35,16 @@ function RegularMenuSection() {
             </div>
 
             <div className="mt-36 flex flex-wrap gap-28 place-content-between">
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {regularMenus.map((food) => {
+                    return (
+                        <Card
+                            key={food.product.id}
+                            foodlist={food.foodlist}
+                            rating={food.rating}
+                            totalReview={food.total_product_id}
+                        />
+                    );
+                })}
             </div>
         </section>
     );

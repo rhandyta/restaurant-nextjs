@@ -19,8 +19,7 @@ function BestCategorySection() {
             <div className="flex justify-between">
                 <div className="w-1/3">
                     <h6 className="text-5xl font-bold">
-                        Best <span className="text-rose-600">Delivered</span>{" "}
-                        Categories
+                        Best <span className="text-rose-600">TOP</span> Selling
                     </h6>
                 </div>
                 <div className="w-72">
