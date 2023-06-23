@@ -1,7 +1,7 @@
 import CryptoJS from "crypto-js";
 import Cookies from "js-cookie";
 
-export const useSetCookieUser = async (user, token) => {
+export const useSetCookieUser = (user, token) => {
     const encryptedUser = CryptoJS.AES.encrypt(
         JSON.stringify(user),
         "user"

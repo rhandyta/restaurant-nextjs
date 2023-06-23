@@ -1,7 +1,19 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import CardBestCategory from "./CardBestCategory";
+import { useGetBestCategory } from "@/hooks/useHookBestCategory";
 
 function BestCategorySection() {
+    const [bestCategories, setBestCategories] = useState([]);
+    useEffect(() => {
+        useGetBestCategory()
+            .then((useBestCategory) => {
+                setBestCategories(useBestCategory);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
     return (
         <section className="pt-20 px-20">
             <div className="flex justify-between">
@@ -20,9 +32,15 @@ function BestCategorySection() {
             </div>
             <div className="mt-10">
                 <div className="flex flex-wrap justify-between">
-                    <CardBestCategory />
-                    <CardBestCategory />
-                    <CardBestCategory />
+                    {bestCategories.map((food) => {
+                        return (
+                            <CardBestCategory
+                                key={food.product_id}
+                                product_id={food.product_id}
+                                foodlist={food.foodlist}
+                            />
+                        );
+                    })}
                 </div>
             </div>
         </section>
