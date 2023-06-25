@@ -15,12 +15,11 @@ function RegularMenuSection() {
                 console.log(error);
             });
     }, []);
-    console.log(regularMenus);
     return (
         <section className="pt-20 px-20 pb-96">
             <div>
                 <h6 className="text-5xl font-bold">
-                    Our <span className="text-rose-600">Regular</span> Menu
+                    Our <span className="text-rose-600">REGULAR</span> Menu
                 </h6>
                 <div className="flex justify-between items-center mt-7">
                     <p className="text-slate-400 w-72">
