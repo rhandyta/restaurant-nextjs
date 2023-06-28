@@ -5,14 +5,18 @@ import { useGetBestCategory } from "@/hooks/useHookBestCategory";
 
 function BestCategorySection() {
     const [bestCategories, setBestCategories] = useState([]);
+
+    const getBestCategories = async () => {
+        try {
+            const response = await useGetBestCategory();
+            setBestCategories(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
-        useGetBestCategory()
-            .then((useBestCategory) => {
-                setBestCategories(useBestCategory);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        getBestCategories();
     }, []);
     return (
         <section className="pt-20 px-20">
@@ -33,11 +37,7 @@ function BestCategorySection() {
                 <div className="flex flex-wrap justify-between">
                     {bestCategories.map((food) => {
                         return (
-                            <CardBestCategory
-                                key={food.product_id}
-                                product_id={food.product_id}
-                                foodlist={food.foodlist}
-                            />
+                            <CardBestCategory key={food.id} product={food} />
                         );
                     })}
                 </div>

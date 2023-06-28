@@ -6,14 +6,20 @@ import { useGetRegularMenu } from "@/hooks/useHookRegularMenu";
 
 function RegularMenuSection() {
     const [regularMenus, setRegularMenus] = useState([]);
+
+    const getRegularMenu = async () => {
+        try {
+            const request = await useGetRegularMenu();
+            console.log(request);
+            const response = await request.json();
+            setRegularMenus(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
-        useGetRegularMenu()
-            .then((res) => {
-                setRegularMenus(res);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        getRegularMenu();
     }, []);
     return (
         <section className="pt-20 px-20 pb-96">

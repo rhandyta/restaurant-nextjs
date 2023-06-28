@@ -15,7 +15,7 @@ export const useGetRegularMenu = async () => {
         if (response.status_code !== 200) {
             throw new Error("Something went wrong!");
         }
-        return response.data; // Mengembalikan hasil respons
+        return response.data;
     } catch (error) {
         throw error;
     }
