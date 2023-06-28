@@ -9,9 +9,7 @@ function RegularMenuSection() {
 
     const getRegularMenu = async () => {
         try {
-            const request = await useGetRegularMenu();
-            console.log(request);
-            const response = await request.json();
+            const response = await useGetRegularMenu();
             setRegularMenus(response);
         } catch (error) {
             console.log(error);
@@ -41,14 +39,7 @@ function RegularMenuSection() {
 
             <div className="mt-36 flex flex-wrap gap-28 place-content-between">
                 {regularMenus.map((food) => {
-                    return (
-                        <Card
-                            key={food.product.id}
-                            foodlist={food.foodlist}
-                            rating={food.rating}
-                            totalReview={food.total_product_id}
-                        />
-                    );
+                    return <Card key={food.id} food={food} />;
                 })}
             </div>
         </section>

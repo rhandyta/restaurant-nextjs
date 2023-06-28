@@ -6,7 +6,7 @@ function LandingPage() {
         <>
             <HeroSection />
             <BestCategorySection />
-            {/* <RegularMenuSection /> */}
+            <RegularMenuSection />
         </>
     );
 }
