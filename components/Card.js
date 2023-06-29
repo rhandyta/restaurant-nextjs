@@ -20,7 +20,7 @@ function Card({ food }) {
                     {food.food_name}
                 </h2>
                 <div className="flex items-center gap-2">
-                    <Rating rating={food.detailorders[0].rating} />{" "}
+                    <Rating rating={food.detailorders[0].rating ?? null} />
                     <span className="text-sm text-slate-400">
                         ({food.detailorders[0].total_product_id})
                     </span>
