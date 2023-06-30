@@ -4,6 +4,7 @@ function Rating({ rating }) {
     return (
         <div className="rating rating-sm">
             <input
+                disabled={true}
                 type="radio"
                 name="rating-1"
                 className={`mask mask-star  ${
@@ -11,6 +12,7 @@ function Rating({ rating }) {
                 }`}
             />
             <input
+                disabled={true}
                 type="radio"
                 name="rating-1"
                 className={`mask mask-star  ${
@@ -18,6 +20,7 @@ function Rating({ rating }) {
                 }`}
             />
             <input
+                disabled={true}
                 type="radio"
                 name="rating-1"
                 className={`mask mask-star  ${
@@ -25,6 +28,7 @@ function Rating({ rating }) {
                 }`}
             />
             <input
+                disabled={true}
                 type="radio"
                 name="rating-1"
                 className={`mask mask-star  ${
@@ -32,6 +36,7 @@ function Rating({ rating }) {
                 }`}
             />
             <input
+                disabled={true}
                 type="radio"
                 name="rating-1"
                 className={`mask mask-star  ${
