@@ -1,15 +1,17 @@
 "use client";
+import { useGetCookieUser } from "@/hooks/useCookieUser";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import ButtonIcon from "./ButtonIcon";
 import { useGetCart } from "@/app/cart/useGetCart";
+import { toastError, toastSuccess } from "./ToastComponent";
 
 function RowTableCart() {
     const [carts, setCarts] = useState(null);
-
-    const useGetCartUser = () =>
-        useGetCart()
+    const [token, setToken] = useState(null);
+    const useGetCartUser = (token) =>
+        useGetCart(token)
             .then((res) => {
                 setCarts(res.data);
             })
@@ -18,9 +20,41 @@ function RowTableCart() {
             });
 
     useEffect(() => {
-        useGetCartUser();
+        const { decryptedTokenJsonString } = useGetCookieUser();
+        setToken(decryptedTokenJsonString);
+        useGetCartUser(decryptedTokenJsonString);
     }, []);
-    console.log(carts);
+
+    const destroyItemCart = async (data) => {
+        try {
+            const id = {
+                id: [data],
+            };
+
+            const request = await fetch(
+                `${process.env.NEXT_PUBLIC_API_HOST}cart/destroy`,
+                {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                    body: JSON.stringify(id),
+                }
+            );
+            const response = await request.json();
+            if (response.status_code !== 200) {
+                throw Error(response.messages);
+            }
+            const tmpData = carts.filter((cart) => cart.id !== data);
+            setCarts([...tmpData]);
+            toastSuccess(response.messages);
+        } catch (error) {
+            toastError(error);
+        }
+    };
+
     return (
         <>
             {carts == null ? (
@@ -64,7 +98,12 @@ function RowTableCart() {
                         <td>{product.quantity * product.product.price}</td>
                         <th>
                             <div className="flex flex-wrap">
-                                <ButtonIcon className="btn-sm bg-rose-600 border-none">
+                                <ButtonIcon
+                                    className="btn-sm bg-rose-600 border-none"
+                                    onClick={(event) =>
+                                        destroyItemCart(product.id)
+                                    }
+                                >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
