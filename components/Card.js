@@ -2,6 +2,7 @@ import React from "react";
 import Button from "./Button";
 import Rating from "./Rating";
 import Image from "next/image";
+import { convertRupiah } from "@/utils/utils";
 
 function Card({ food }) {
     return (
@@ -26,9 +27,9 @@ function Card({ food }) {
                     </span>
                 </div>
                 <div className="flex flex-col items-center gap-2">
-                    <p className="font-bold text-3xl">
-                        Rp{Number(food.price).toLocaleString("id-ID")}
-                    </p>
+                    <span className="font-bold text-3xl">
+                        Rp{convertRupiah(Number(food.price))}
+                    </span>
                     <Button
                         text="Buy Now"
                         className="bg-rose-600 rounded-2xl w-fit border-none btn-sm"

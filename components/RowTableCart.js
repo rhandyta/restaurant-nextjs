@@ -10,6 +10,7 @@ import {
     decrementQuantity,
     incrementQuantity,
 } from "@/app/cart/useQuantityItem";
+import { convertRupiah } from "@/utils/utils";
 
 function RowTableCart() {
     const [carts, setCarts] = useState(null);
@@ -110,7 +111,14 @@ function RowTableCart() {
                                 )}
                             </div>
                         </td>
-                        <td>{product.quantity * product.product.price}</td>
+                        <td>
+                            <span className="font-bold">
+                                Rp
+                                {convertRupiah(
+                                    product.quantity * product.product.price
+                                )}
+                            </span>
+                        </td>
                         <th>
                             <div className="flex flex-wrap">
                                 {isLoading ? (
