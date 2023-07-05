@@ -1,6 +1,66 @@
+"use client";
+import { useEffect, useState, useContext } from "react";
 import RowTableCart from "./RowTableCart";
 
+import { useGetCookieUser } from "@/hooks/useCookieUser";
+import { useGetCart } from "@/app/cart/useGetCart";
+
+import { CartContext } from "@/context/cart-context";
+
 function Table() {
+    const { cart, setCart } = useContext(CartContext);
+
+    const [carts, setCarts] = useState(null);
+    const [token, setToken] = useState(null);
+
+    const [subTotal, setSubTotal] = useState(0);
+    const [discount, setDiscount] = useState(0);
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const useGetCartUser = (decryptedTokenJsonString) => {
+        setIsLoading(true);
+        useGetCart(decryptedTokenJsonString)
+            .then((res) => {
+                setCarts(res.data);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setIsLoading(true);
+            });
+    };
+
+    const refreshCart = async (decryptedTokenJsonString) => {
+        useGetCart(decryptedTokenJsonString)
+            .then((res) => {
+                setCarts(res.data);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setIsLoading(true);
+            });
+    };
+
+    useEffect(() => {
+        const { decryptedTokenJsonString } = useGetCookieUser();
+        setToken(decryptedTokenJsonString);
+        useGetCartUser(decryptedTokenJsonString);
+    }, []);
+
+    useEffect(() => {
+        setCart((prev) => {
+            return {
+                ...prev,
+                subTotal,
+                discount,
+                total: subTotal - discount,
+            };
+        });
+    }, [subTotal]);
+    console.log("cart => ", cart);
+    console.log("subTotal => ", subTotal);
     return (
         <table className="table w-full">
             <thead>
@@ -12,7 +72,23 @@ function Table() {
                 </tr>
             </thead>
             <tbody>
-                <RowTableCart />
+                {isLoading ? (
+                    <tr>
+                        <td colSpan={5}>
+                            <p>Loading...</p>
+                        </td>
+                    </tr>
+                ) : (
+                    carts?.map((product) => (
+                        <RowTableCart
+                            key={product.id}
+                            product={product}
+                            token={token}
+                            refreshCart={refreshCart}
+                            setSubTotal={setSubTotal}
+                        />
+                    ))
+                )}
             </tbody>
         </table>
     );

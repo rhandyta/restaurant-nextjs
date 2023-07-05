@@ -39,10 +39,13 @@ function Card({ food }) {
                                 : food.detailorders[0].rating
                         }
                     />
+
                     <span className="text-sm text-slate-400">
+                        (
                         {food.detailorders.length === 0
                             ? 0
                             : food.detailorders[0].total_product_id}
+                        )
                     </span>
                 </div>
                 <div className="flex flex-col items-center gap-2">
