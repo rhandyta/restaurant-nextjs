@@ -48,6 +48,7 @@ function Login() {
                 validationSchema={validationSchema}
             >
                 {(props) => {
+                    console.log(props);
                     return (
                         <div className="flex flex-wrap">
                             <div className="form-control w-full">
