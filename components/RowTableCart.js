@@ -130,7 +130,7 @@ function RowTableCart() {
                                     <ButtonIcon
                                         key={product.id}
                                         className="btn-sm bg-rose-600 border-none"
-                                        onClick={(event) =>
+                                        onClick={() =>
                                             destroyItemCart(product.id)
                                         }
                                     >

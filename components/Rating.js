@@ -1,6 +1,6 @@
 import React from "react";
 
-function Rating({ rating }) {
+function Rating({ rating = 0 }) {
     return (
         <div className="rating rating-sm">
             <input

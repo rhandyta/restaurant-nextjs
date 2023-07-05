@@ -48,3 +48,16 @@ export const toastError = (message) => {
         theme: "light",
     });
 };
+
+export const toastWarning = (message) => {
+    toast.warning(`${message}`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    });
+};
