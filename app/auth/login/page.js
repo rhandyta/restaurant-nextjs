@@ -13,9 +13,9 @@ import { useRouter } from "next/navigation";
 import { useGetCookieUser } from "@/hooks/useCookieUser";
 
 function Login() {
-    const router = useRouter();
-    // const submitFormLogin = useLogin;
-    // const data = useGetCookieUser;
+    const router = useRouter;
+    const submitFormLogin = useLogin;
+    const data = useGetCookieUser;
     const [isLoading, setIsLoading] = useState(false);
 
     const initialValues = {
@@ -30,8 +30,8 @@ function Login() {
 
     const onSubmit = async (values, props) => {
         console.log({ values, props });
-        // const result = await submitFormLogin(values, setIsLoading);
-        // if (!result) return false;
+        const result = await submitFormLogin(values, setIsLoading);
+        if (!result) return false;
         await props.resetForm({ values: "" });
         router.push("/");
     };
