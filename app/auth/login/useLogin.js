@@ -2,6 +2,7 @@ import { toastError, toastSuccess } from "@/components/ToastComponent";
 import { useSetCookieUser } from "@/hooks/useCookieUser";
 
 const useLogin = async (values, setIsLoading) => {
+    const setCookieUser = useSetCookieUser;
     try {
         setIsLoading(true);
         const request = await fetch(
@@ -21,7 +22,7 @@ const useLogin = async (values, setIsLoading) => {
         } else if (response.status_code !== 200) {
             throw new Error("Something went wrong!");
         }
-        useSetCookieUser(response.user, response.token);
+        setCookieUser(response.user, response.token);
         toastSuccess(response.messages);
         setIsLoading(false);
         return true;
