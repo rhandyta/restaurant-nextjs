@@ -29,7 +29,6 @@ function Login() {
     });
 
     const onSubmit = async (values, props) => {
-        console.log({ values, props });
         const result = await submitFormLogin(values, setIsLoading);
         if (!result) return false;
         await props.resetForm({ values: "" });

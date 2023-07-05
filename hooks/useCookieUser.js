@@ -9,19 +9,19 @@ export const useSetCookieUser = (user, token) => {
     const encryptedToken = CryptoJS.AES.encrypt(token, "token").toString();
 
     Cookies.set("token", encryptedToken, {
-        // secure: true,
-        // httpOnly: true,
+        secure: true,
+        httpOnly: true,
         sameSite: "strict",
-        domain: "localhost",
+        domain: window.location.host,
         path: "/",
         expires: null,
     });
 
     Cookies.set("user", encryptedUser, {
-        // secure: true,
-        // httpOnly: true,
+        secure: true,
+        httpOnly: true,
         sameSite: "strict",
-        domain: "localhost",
+        domain: window.location.host,
         path: "/",
         expires: null,
     });
