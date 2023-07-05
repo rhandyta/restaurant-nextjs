@@ -14,9 +14,9 @@ import ErrorMessageField from "@/components/ErrorMessageField";
 import { useGetCookieUser } from "@/hooks/useCookieUser";
 
 function Register() {
-    const register = useRegister();
+    const register = useRegister;
     const router = useRouter();
-    const data = useGetCookieUser();
+    const data = useGetCookieUser;
     const [isLoading, setIsLoading] = useState(false);
 
     const initialValues = {

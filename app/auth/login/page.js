@@ -15,7 +15,7 @@ import { useGetCookieUser } from "@/hooks/useCookieUser";
 function Login() {
     const login = useLogin;
     const router = useRouter();
-    const data = useGetCookieUser();
+    const data = useGetCookieUser;
     const [isLoading, setIsLoading] = useState(false);
 
     const initialValues = {
