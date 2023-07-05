@@ -12,7 +12,7 @@ import ErrorMessageField from "@/components/ErrorMessageField";
 import { useRouter } from "next/navigation";
 import { useGetCookieUser } from "@/hooks/useCookieUser";
 
-function Login() {
+function page() {
     // const router = useRouter;
     // const submitFormLogin = useLogin;
     // const data = useGetCookieUser;
@@ -93,4 +93,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default page;
