@@ -12,37 +12,37 @@ import ErrorMessageField from "@/components/ErrorMessageField";
 import { useRouter } from "next/navigation";
 import { useGetCookieUser } from "@/hooks/useCookieUser";
 
-function page() {
-    // const router = useRouter;
-    // const submitFormLogin = useLogin;
-    // const data = useGetCookieUser;
-    // const [isLoading, setIsLoading] = useState(false);
+function Login() {
+    const router = useRouter();
+    const submitFormLogin = useLogin;
+    const data = useGetCookieUser;
+    const [isLoading, setIsLoading] = useState(false);
 
-    // const initialValues = {
-    //     email: "",
-    //     password: "",
-    // };
+    const initialValues = {
+        email: "",
+        password: "",
+    };
 
-    // const validationSchema = yup.object({
-    //     email: yup.string().email().required(),
-    //     password: yup.string().required().min(3),
-    // });
+    const validationSchema = yup.object({
+        email: yup.string().email().required(),
+        password: yup.string().required().min(3),
+    });
 
-    // const onSubmit = async (values, props) => {
-    //     console.log({ values, props });
-    //     const result = await submitFormLogin(values, setIsLoading);
-    //     if (!result) return false;
-    //     await props.resetForm({ values: "" });
-    //     router.push("/");
-    // };
+    const onSubmit = async (values, props) => {
+        console.log({ values, props });
+        const result = await submitFormLogin(values, setIsLoading);
+        if (!result) return false;
+        await props.resetForm({ values: "" });
+        router.push("/");
+    };
 
-    // useEffect(() => {
-    //     // if (data !== null) return router.push("/home");
-    // }, []);
+    useEffect(() => {
+        // if (data !== null) return router.push("/home");
+    }, []);
     return (
         <section className="h-96 md:h-auto">
             <h6 className="font-semibold text-4xl text-center">Login</h6>
-            {/* <Formik
+            <Formik
                 initialValues={initialValues}
                 onSubmit={onSubmit}
                 validationSchema={validationSchema}
@@ -82,7 +82,7 @@ function page() {
                         </div>
                     );
                 }}
-            </Formik> */}
+            </Formik>
             <p className="mt-3 inline-block font-thin text-sm">
                 don&#39;t have an account?{" "}
                 <span className="text-blue-600 hover:underline hover:text-blue-400">
@@ -93,4 +93,4 @@ function page() {
     );
 }
 
-export default page;
+export default Login;
