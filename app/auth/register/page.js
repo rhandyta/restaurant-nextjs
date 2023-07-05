@@ -60,82 +60,80 @@ function Register() {
             >
                 {(props) => {
                     return (
-                        <Form>
-                            <div className="flex flex-wrap gap-x-2 gap-y-0">
-                                <div className="form-control w-full flex-1">
-                                    <Label label="Firstname" />
-                                    <Input
-                                        type="text"
-                                        name="firstname"
-                                        placeholder="Input your firstname"
-                                    />
-                                    <ErrorMessageField name="firstname" />
-                                </div>
-                                <div className="form-control w-full flex-1">
-                                    <Label label="Lastname" />
-                                    <Input
-                                        type="text"
-                                        name="lastname"
-                                        placeholder="Input your lastname"
-                                    />
-                                    <ErrorMessageField name="lastname" />
-                                </div>
-                                <div className="form-control w-full">
-                                    <Label label="Middlename" />
-                                    <Input
-                                        type="text"
-                                        name="middlename"
-                                        placeholder="Input your middlename"
-                                    />
-                                    <ErrorMessageField name="middlename" />
-                                </div>
-                                <div className="form-control w-full ">
-                                    <Label label="Email" />
-                                    <Input
-                                        type="email"
-                                        name="email"
-                                        placeholder="Input your email"
-                                    />
-                                    <ErrorMessageField name="email" />
-                                </div>
-                                <div className="form-control w-full ">
-                                    <Label label="Password" />
-                                    <Input
-                                        type="password"
-                                        name="password"
-                                        placeholder="Input your password"
-                                    />
-                                    <ErrorMessageField name="password" />
-                                </div>
-                                <div className="form-control w-full ">
-                                    <Label label="Telephone" />
-                                    <Input
-                                        type="text"
-                                        name="telephone"
-                                        placeholder="Input your telephone"
-                                    />{" "}
-                                    <ErrorMessageField name="telephone" />
-                                </div>
-                                <div className="form-control w-full">
-                                    <Label label="Address" />
-                                    <TextArea
-                                        as="textarea"
-                                        placeholder="Address"
-                                        name="address"
-                                    />
-                                    <ErrorMessageField name="address" />
-                                </div>
-                                {isLoading === true ? (
-                                    <ButtonLoading className="btn-block btn-sm mt-3" />
-                                ) : (
-                                    <Button
-                                        type="submit"
-                                        text="Register"
-                                        className="btn-block btn-sm mt-3"
-                                    />
-                                )}
+                        <div className="flex flex-wrap gap-x-2 gap-y-0">
+                            <div className="form-control w-full flex-1">
+                                <Label label="Firstname" />
+                                <Input
+                                    type="text"
+                                    name="firstname"
+                                    placeholder="Input your firstname"
+                                />
+                                <ErrorMessageField name="firstname" />
                             </div>
-                        </Form>
+                            <div className="form-control w-full flex-1">
+                                <Label label="Lastname" />
+                                <Input
+                                    type="text"
+                                    name="lastname"
+                                    placeholder="Input your lastname"
+                                />
+                                <ErrorMessageField name="lastname" />
+                            </div>
+                            <div className="form-control w-full">
+                                <Label label="Middlename" />
+                                <Input
+                                    type="text"
+                                    name="middlename"
+                                    placeholder="Input your middlename"
+                                />
+                                <ErrorMessageField name="middlename" />
+                            </div>
+                            <div className="form-control w-full ">
+                                <Label label="Email" />
+                                <Input
+                                    type="email"
+                                    name="email"
+                                    placeholder="Input your email"
+                                />
+                                <ErrorMessageField name="email" />
+                            </div>
+                            <div className="form-control w-full ">
+                                <Label label="Password" />
+                                <Input
+                                    type="password"
+                                    name="password"
+                                    placeholder="Input your password"
+                                />
+                                <ErrorMessageField name="password" />
+                            </div>
+                            <div className="form-control w-full ">
+                                <Label label="Telephone" />
+                                <Input
+                                    type="text"
+                                    name="telephone"
+                                    placeholder="Input your telephone"
+                                />{" "}
+                                <ErrorMessageField name="telephone" />
+                            </div>
+                            <div className="form-control w-full">
+                                <Label label="Address" />
+                                <TextArea
+                                    as="textarea"
+                                    placeholder="Address"
+                                    name="address"
+                                />
+                                <ErrorMessageField name="address" />
+                            </div>
+                            {isLoading === true ? (
+                                <ButtonLoading className="btn-block btn-sm mt-3" />
+                            ) : (
+                                <Button
+                                    type="submit"
+                                    text="Register"
+                                    className="btn-block btn-sm mt-3"
+                                />
+                            )}
+                        </div>
                     );
                 }}
             </Formik>

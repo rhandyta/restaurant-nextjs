@@ -49,7 +49,7 @@ function Login() {
             >
                 {(props) => {
                     return (
-                        <Form className="flex flex-wrap">
+                        <div className="flex flex-wrap">
                             <div className="form-control w-full">
                                 <Label label="Email" />
                                 <Input
@@ -79,7 +79,7 @@ function Login() {
                                     className="mt-3 btn-block btn-sm"
                                 />
                             )}
-                        </Form>
+                        </div>
                     );
                 }}
             </Formik>
