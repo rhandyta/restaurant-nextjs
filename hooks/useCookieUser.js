@@ -7,7 +7,6 @@ export const useSetCookieUser = (user, token) => {
         "user"
     ).toString();
     const encryptedToken = CryptoJS.AES.encrypt(token, "token").toString();
-    console.log({ encryptedToken });
 
     Cookies.set("token", encryptedToken, {
         secure: true,
