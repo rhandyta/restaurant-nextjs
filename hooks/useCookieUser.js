@@ -14,7 +14,7 @@ export const useSetCookieUser = (user, token) => {
         sameSite: "strict",
         domain: "localhost",
         path: "/",
-        expires: 1,
+        expires: null,
     });
 
     Cookies.set("user", encryptedUser, {
@@ -23,7 +23,7 @@ export const useSetCookieUser = (user, token) => {
         sameSite: "strict",
         domain: "localhost",
         path: "/",
-        expires: 1,
+        expires: null,
     });
 };
 

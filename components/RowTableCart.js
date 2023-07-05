@@ -6,9 +6,15 @@ import Button from "./Button";
 import ButtonIcon from "./ButtonIcon";
 import { useDestroyItem, useGetCart } from "@/app/cart/useGetCart";
 import ButtonLoading from "./ButtonLoading";
+import {
+    decrementQuantity,
+    incrementQuantity,
+} from "@/app/cart/useQuantityItem";
+
 function RowTableCart() {
     const [carts, setCarts] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingQuantity, setIsLoadingQuantity] = useState(false);
     const [token, setToken] = useState(null);
 
     const useGetCartUser = (decryptedTokenJsonString) =>
@@ -32,6 +38,18 @@ function RowTableCart() {
         return true;
     };
 
+    const incrementCartItem = async (id) => {
+        setIsLoadingQuantity(true);
+        await incrementQuantity(id, setIsLoadingQuantity, token);
+        useGetCartUser(token);
+        return true;
+    };
+    const decrementCartItem = async (id) => {
+        setIsLoadingQuantity(true);
+        await decrementQuantity(id, setIsLoadingQuantity, token);
+        useGetCartUser(token);
+        return true;
+    };
     return (
         <>
             {carts == null ? (
@@ -67,9 +85,29 @@ function RowTableCart() {
                         </td>
                         <td>
                             <div className="flex gap-1 items-center">
-                                <Button text="-" className="btn-sm" />
+                                {isLoadingQuantity ? (
+                                    <ButtonLoading className="btn-sm" />
+                                ) : (
+                                    <Button
+                                        text="Minus"
+                                        className="btn-sm"
+                                        onClick={() =>
+                                            decrementCartItem(product.id)
+                                        }
+                                    />
+                                )}
                                 <span>{product.quantity}</span>
-                                <Button text="+" className="btn-sm" />
+                                {isLoadingQuantity ? (
+                                    <ButtonLoading className="btn-sm" />
+                                ) : (
+                                    <Button
+                                        text="Plus"
+                                        className="btn-sm"
+                                        onClick={() =>
+                                            incrementCartItem(product.id)
+                                        }
+                                    />
+                                )}
                             </div>
                         </td>
                         <td>{product.quantity * product.product.price}</td>
