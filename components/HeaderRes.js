@@ -1,7 +1,7 @@
 import Link from "next/link";
 import SwitchCartAuth from "./SwitchCartAuth";
 
-function Header() {
+function HeaderRes() {
     return (
         <nav className="navbar p-0">
             <div className="navbar-start">
@@ -102,4 +102,4 @@ function Header() {
     );
 }
 
-export default Header;
+export default HeaderRes;

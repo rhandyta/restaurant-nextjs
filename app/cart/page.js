@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/components/Button";
-import Header from "@/components/Header";
+import HeaderRes from "@/components/HeaderRes";
 import Input from "@/components/Input";
 import Table from "@/components/Table";
 import { Formik } from "formik";
@@ -23,7 +23,7 @@ function Cart() {
     return (
         <main>
             <div className="bg-rose-100 px-20 w-full m-0">
-                <Header />
+                <HeaderRes />
             </div>
             <section className="px-20 w-full mt-10">
                 <div className="w-full min-h-96 flex justify-between">

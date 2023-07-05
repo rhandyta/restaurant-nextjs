@@ -1,5 +1,4 @@
 "use client";
-import Header from "@/components/Header";
 import ButtonIcon from "@/components/ButtonIcon";
 import React from "react";
 import { Formik } from "formik";
@@ -7,6 +6,7 @@ import Input from "@/components/Input";
 import Label from "@/components/Label";
 import Button from "@/components/Button";
 import * as yup from "yup";
+import HeaderRes from "@/components/HeaderRes";
 
 function page() {
     const initialValues = {
@@ -39,7 +39,7 @@ function page() {
     return (
         <main>
             <div className="bg-rose-100 px-20 w-full m-0">
-                <Header />
+                <HeaderRes />
             </div>
             <section className="w-full mt-10 flex justify-center items-center">
                 <div className="card w-4/6 h-fit bg-rose-100 shadow-xl">
