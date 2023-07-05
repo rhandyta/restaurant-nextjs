@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { useGetCookieUser } from "@/hooks/useCookieUser";
 
 function Login() {
+    const login = useLogin();
     const router = useRouter();
     const data = useGetCookieUser();
     const [isLoading, setIsLoading] = useState(false);
@@ -28,7 +29,7 @@ function Login() {
     });
 
     const onSubmit = async (values, props) => {
-        const result = await useLogin(values, setIsLoading);
+        const result = await login(values, setIsLoading);
         if (!result) return false;
         await props.resetForm({ values: "" });
         router.push("/");
@@ -82,7 +83,7 @@ function Login() {
                 }}
             </Formik>
             <p className="mt-3 inline-block font-thin text-sm">
-                don't have an account?{" "}
+                don&#39;t have an account?{" "}
                 <span className="text-blue-600 hover:underline hover:text-blue-400">
                     <Link href="/auth/register">create now</Link>
                 </span>

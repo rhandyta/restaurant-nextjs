@@ -2,25 +2,27 @@
 import { useEffect, useState, useContext } from "react";
 import RowTableCart from "./RowTableCart";
 
-import { useGetCookieUser } from "@/hooks/useCookieUser";
 import { useGetCart } from "@/app/cart/useGetCart";
 
 import { CartContext } from "@/context/cart-context";
+import { UserContext } from "@/context/user-context";
 
 function Table() {
     const { cart, setCart } = useContext(CartContext);
-
     const [carts, setCarts] = useState(null);
-    const [token, setToken] = useState(null);
+
+    const { token } = useContext(UserContext);
 
     const [subTotal, setSubTotal] = useState(0);
     const [discount, setDiscount] = useState(0);
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const useGetCartUser = (decryptedTokenJsonString) => {
+    const getCart = useGetCart;
+
+    const getCartUser = () => {
         setIsLoading(true);
-        useGetCart(decryptedTokenJsonString)
+        getCart(token)
             .then((res) => {
                 setCarts(res.data);
                 setIsLoading(false);
@@ -31,8 +33,8 @@ function Table() {
             });
     };
 
-    const refreshCart = async (decryptedTokenJsonString) => {
-        useGetCart(decryptedTokenJsonString)
+    const refreshCart = async () => {
+        getCart(token)
             .then((res) => {
                 setCarts(res.data);
                 setIsLoading(false);
@@ -44,10 +46,8 @@ function Table() {
     };
 
     useEffect(() => {
-        const { decryptedTokenJsonString } = useGetCookieUser();
-        setToken(decryptedTokenJsonString);
-        useGetCartUser(decryptedTokenJsonString);
-    }, []);
+        getCartUser(token);
+    }, [token]);
 
     useEffect(() => {
         setCart((prev) => {
@@ -59,8 +59,6 @@ function Table() {
             };
         });
     }, [subTotal]);
-    console.log("cart => ", cart);
-    console.log("subTotal => ", subTotal);
     return (
         <table className="table w-full">
             <thead>

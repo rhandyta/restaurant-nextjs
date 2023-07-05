@@ -17,7 +17,7 @@ export const useGetCart = async (token) => {
     }
 };
 
-export const useDestroyItem = async (data, setIsLoading, token) => {
+export const useDestroyItem = async (data, token) => {
     try {
         const id = {
             id: [data],
@@ -40,9 +40,7 @@ export const useDestroyItem = async (data, setIsLoading, token) => {
             throw Error(response.messages);
         }
         toastSuccess(response.messages);
-        setIsLoading(false);
     } catch (error) {
         toastError(error);
-        setIsLoading(false);
     }
 };

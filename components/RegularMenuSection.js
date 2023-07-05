@@ -5,11 +5,12 @@ import Card from "./Card";
 import { useGetRegularMenu } from "@/hooks/useHookRegularMenu";
 
 function RegularMenuSection() {
+    const regularMenu = useGetRegularMenu();
     const [regularMenus, setRegularMenus] = useState([]);
 
     const getRegularMenu = async () => {
         try {
-            const response = await useGetRegularMenu();
+            const response = await regularMenu;
             setRegularMenus(response);
         } catch (error) {
             console.log(error);

@@ -8,12 +8,13 @@ import { UserContext } from "@/context/user-context";
 import ButtonLoading from "./ButtonLoading";
 
 function Card({ food }) {
+    const createProductToCart = useStoreProductToCart;
     const [isLoading, setIsLoading] = useState(false);
 
     const { user, token } = useContext(UserContext);
     const storeProductToCart = (id) => {
         setIsLoading(true);
-        useStoreProductToCart(user.id, id, token, setIsLoading);
+        createProductToCart(user.id, id, token, setIsLoading);
     };
 
     return (

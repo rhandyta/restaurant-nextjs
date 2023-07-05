@@ -4,11 +4,12 @@ import CardBestCategory from "./CardBestCategory";
 import { useGetBestCategory } from "@/hooks/useHookBestCategory";
 
 function BestCategorySection() {
+    const bestCategory = useGetBestCategory;
     const [bestCategories, setBestCategories] = useState([]);
 
     const getBestCategories = async () => {
         try {
-            const response = await useGetBestCategory();
+            const response = await bestCategory();
             setBestCategories(response);
         } catch (error) {
             console.log(error);

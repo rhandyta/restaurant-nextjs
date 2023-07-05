@@ -14,6 +14,7 @@ import ErrorMessageField from "@/components/ErrorMessageField";
 import { useGetCookieUser } from "@/hooks/useCookieUser";
 
 function Register() {
+    const register = useRegister();
     const router = useRouter();
     const data = useGetCookieUser();
     const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +40,7 @@ function Register() {
     });
 
     const onSubmit = async (values, props) => {
-        const result = await useRegister(values, setIsLoading);
+        const result = await register(values, setIsLoading);
         if (!result) return false;
         props.resetForm({ values: "" });
         router.push("/auth/login");

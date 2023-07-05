@@ -15,11 +15,13 @@ function RowTableCart({ product, token, refreshCart, setSubTotal }) {
     const [quantity, setQuantity] = useState(product.quantity);
     const [isLoading, setIsLoading] = useState(false);
     const [isLoadingQuantity, setIsLoadingQuantity] = useState(false);
+    const destroyItem = useDestroyItem;
 
     const destroyItemCart = async (data) => {
         setIsLoading(true);
-        await useDestroyItem(data, setIsLoading, token);
+        await destroyItem(data, token);
         await refreshCart(token);
+        setIsLoading(false);
         return true;
     };
 
