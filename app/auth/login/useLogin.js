@@ -27,6 +27,7 @@ const useLogin = async (values, setIsLoading) => {
         setIsLoading(false);
         return true;
     } catch (error) {
+        console.log(error);
         toastError(error);
         setIsLoading(false);
         return false;
