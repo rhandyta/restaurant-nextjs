@@ -42,7 +42,7 @@ function Login() {
     return (
         <section className="h-96 md:h-auto">
             <h6 className="font-semibold text-4xl text-center">Login</h6>
-            <Formik
+            {/* <Formik
                 initialValues={initialValues}
                 onSubmit={onSubmit}
                 validationSchema={validationSchema}
@@ -82,7 +82,7 @@ function Login() {
                         </div>
                     );
                 }}
-            </Formik>
+            </Formik> */}
             <p className="mt-3 inline-block font-thin text-sm">
                 don&#39;t have an account?{" "}
                 <span className="text-blue-600 hover:underline hover:text-blue-400">
