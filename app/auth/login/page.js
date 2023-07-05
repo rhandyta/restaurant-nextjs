@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { useGetCookieUser } from "@/hooks/useCookieUser";
 
 function Login() {
-    const login = useLogin();
+    const login = useLogin;
     const router = useRouter();
     const data = useGetCookieUser();
     const [isLoading, setIsLoading] = useState(false);
@@ -48,7 +48,6 @@ function Login() {
                 validationSchema={validationSchema}
             >
                 {(props) => {
-                    console.log(props);
                     return (
                         <div className="flex flex-wrap">
                             <div className="form-control w-full">
