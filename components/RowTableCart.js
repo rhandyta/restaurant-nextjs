@@ -22,34 +22,46 @@ function RowTableCart({ product, token, refreshCart, setSubTotal }) {
         await destroyItem(data, token);
         await refreshCart(token);
         setIsLoading(false);
-        return true;
-    };
-
-    const incrementCartItem = async (id) => {
-        setIsLoadingQuantity(true);
-        await incrementQuantity(id, setIsLoadingQuantity, token);
-        refreshCart(token);
         setSubTotal(
-            (prev) => prev + Number(quantity) * Number(product.product.price)
-        );
-
-        return true;
-    };
-    const decrementCartItem = async (id) => {
-        setIsLoadingQuantity(true);
-        await decrementQuantity(id, setIsLoadingQuantity, token);
-        refreshCart(token);
-        setSubTotal(
-            (prev) => prev - Number(quantity) * Number(product.product.price)
+            (prev) => prev - Number(product.product.price) * product.quantity
         );
         return true;
     };
+
+    const quantityCartItem = async (id, preference) => {
+        if (isLoadingQuantity) return false;
+
+        if (preference === "increment") {
+            setIsLoadingQuantity(true);
+            await incrementQuantity(id, setIsLoadingQuantity, token);
+            refreshCart(token);
+            setSubTotal((prev) => prev + Number(product.product.price));
+            setIsLoadingQuantity(false);
+            return true;
+        }
+
+        if (preference === "decrement") {
+            setIsLoadingQuantity(true);
+            await decrementQuantity(id, setIsLoadingQuantity, token);
+            refreshCart(token);
+            setSubTotal((prev) => prev - Number(product.product.price));
+            setIsLoadingQuantity(false);
+            return true;
+        }
+    };
+    // const decrementCartItem = async (id) => {
+    //     if (isLoadingQuantity) return false;
+    //     setIsLoadingQuantity(true);
+    //     await decrementQuantity(id, setIsLoadingQuantity, token);
+    //     refreshCart(token);
+    //     setSubTotal((prev) => prev - Number(product.product.price));
+    // };
 
     useEffect(() => {
         setSubTotal(
-            (prev) => prev + Number(quantity) * Number(product.product.price)
+            (prev) => prev + Number(product.product.price) * Number(quantity)
         );
-    }, [quantity]);
+    }, []);
 
     return (
         <tr>
@@ -80,7 +92,9 @@ function RowTableCart({ product, token, refreshCart, setSubTotal }) {
                         <Button
                             text="Minus"
                             className="btn-sm"
-                            onClick={() => decrementCartItem(product.id)}
+                            onClick={() =>
+                                quantityCartItem(product.id, "decrement")
+                            }
                         />
                     )}
                     <span>{product.quantity}</span>
@@ -90,7 +104,9 @@ function RowTableCart({ product, token, refreshCart, setSubTotal }) {
                         <Button
                             text="Plus"
                             className="btn-sm"
-                            onClick={() => incrementCartItem(product.id)}
+                            onClick={() =>
+                                quantityCartItem(product.id, "increment")
+                            }
                         />
                     )}
                 </div>

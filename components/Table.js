@@ -8,10 +8,9 @@ import { CartContext } from "@/context/cart-context";
 import { UserContext } from "@/context/user-context";
 
 function Table() {
+    const { token } = useContext(UserContext);
     const { cart, setCart } = useContext(CartContext);
     const [carts, setCarts] = useState(null);
-
-    const { token } = useContext(UserContext);
 
     const [subTotal, setSubTotal] = useState(0);
     const [discount, setDiscount] = useState(0);
@@ -22,31 +21,40 @@ function Table() {
 
     const getCartUser = () => {
         setIsLoading(true);
-        getCart(token)
-            .then((res) => {
-                setCarts(res.data);
-                setIsLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setIsLoading(true);
-            });
+        if (token) {
+            // Tambahkan pengecekan apakah token tersedia
+            getCart(token)
+                .then((res) => {
+                    setCarts(res.data);
+                    setIsLoading(false);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setIsLoading(false); // Ubah menjadi false jika terjadi error
+                });
+        } else {
+            setIsLoading(false); // Ubah menjadi false jika token tidak tersedia
+        }
     };
 
     const refreshCart = async () => {
-        getCart(token)
-            .then((res) => {
-                setCarts(res.data);
-                setIsLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-                setIsLoading(true);
-            });
+        setTimeout(() => {
+            getCart(token)
+                .then((res) => {
+                    setCarts(res.data);
+                    setIsLoading(false);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    setIsLoading(true);
+                });
+        }, 1000);
     };
 
     useEffect(() => {
-        getCartUser(token);
+        if (token) {
+            getCartUser(token);
+        }
     }, [token]);
 
     useEffect(() => {
@@ -59,6 +67,7 @@ function Table() {
             };
         });
     }, [subTotal]);
+
     return (
         <table className="table w-full">
             <thead>

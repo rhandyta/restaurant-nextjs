@@ -3,11 +3,16 @@ import Button from "@/components/Button";
 import HeaderRes from "@/components/HeaderRes";
 import Input from "@/components/Input";
 import Table from "@/components/Table";
+import { CartContext } from "@/context/cart-context";
+import { convertRupiah } from "@/utils/utils";
 import { Formik } from "formik";
 import Link from "next/link";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import * as yup from "yup";
 function Cart() {
+    const { cart } = useContext(CartContext);
+    const [prices, setPrices] = useState({});
+
     const initialValues = {
         coupon: "",
     };
@@ -19,6 +24,14 @@ function Cart() {
     const onSubmit = (values, props) => {
         console.log({ values, props });
     };
+
+    useEffect(() => {
+        setPrices({
+            subTotal: cart.subTotal,
+            discount: cart.discount,
+            total: cart.total,
+        });
+    }, [cart]);
 
     return (
         <main>
@@ -62,16 +75,19 @@ function Cart() {
                         <div className="bg-rose-200 h-[55%] p-5">
                             <div className="border-b-2 border-rose-400">
                                 <p>
-                                    Total Price: <span>$69.97</span>
+                                    Total Price:{" "}
+                                    <span className="font-medium">
+                                        Rp{convertRupiah(prices.subTotal)}
+                                    </span>
                                 </p>
                                 <p>
                                     Discount:{" "}
                                     <span className="text-rose-600">
-                                        -$10.00
+                                        Rp{prices.discount}
                                     </span>
                                 </p>
                                 <p className="font-semibold text-slate-800">
-                                    Total: $57.97
+                                    Total: Rp{convertRupiah(prices.total)}
                                 </p>
                             </div>
                             <div className="mt-2 flex flex-col gap-1">
