@@ -91,7 +91,12 @@ function Cart() {
                                 </p>
                             </div>
                             <div className="mt-2 flex flex-col gap-1">
-                                <Link href="/checkout">
+                                <Link
+                                    href={{
+                                        pathname: "/checkout",
+                                        query: cart,
+                                    }}
+                                >
                                     <Button
                                         text="Make Purchase"
                                         className="w-full h-10"

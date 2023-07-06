@@ -64,9 +64,10 @@ function Table() {
                 subTotal,
                 discount,
                 total: subTotal - discount,
+                item: JSON.stringify(carts),
             };
         });
-    }, [subTotal]);
+    }, [subTotal, carts]);
 
     return (
         <table className="table w-full">

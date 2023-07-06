@@ -1,14 +1,15 @@
 "use client";
 import ButtonIcon from "@/components/ButtonIcon";
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
-import Input from "@/components/Input";
-import Label from "@/components/Label";
-import Button from "@/components/Button";
 import * as yup from "yup";
 import HeaderRes from "@/components/HeaderRes";
+import CreditCard from "@/components/CreditCard";
+import BankTransfer from "@/components/BankTransfer";
 
-function page() {
+function Page(props) {
+    const [method, setMethod] = useState("bank_transfer");
+
     const initialValues = {
         payment_type: "",
         bank: "",
@@ -36,6 +37,23 @@ function page() {
         //
     };
 
+    const handleChangeMethod = (method) => {
+        switch (method) {
+            case "bank_transfer":
+                setMethod("bank_transfer");
+                break;
+            case "credit_card":
+                setMethod("credit_card");
+                break;
+            case "ewallet":
+                setMethod("ewallet");
+                break;
+            default:
+                setMethod("cod");
+        }
+    };
+    console.log(method);
+
     return (
         <main>
             <div className="bg-rose-100 px-20 w-full m-0">
@@ -51,7 +69,15 @@ function page() {
                             Choose a payment method
                         </div>
                         <div className="flex justify-center items-center gap-10">
-                            <ButtonIcon className="w-32 h-24 rounded-md shadow-md p-2">
+                            <ButtonIcon
+                                className={`w-32 h-28 rounded-md shadow-md p-2 ${
+                                    method == "credit_card" &&
+                                    "bg-neutral-focus"
+                                }`}
+                                onClick={() =>
+                                    handleChangeMethod("credit_card")
+                                }
+                            >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -68,7 +94,15 @@ function page() {
                                 </svg>
                                 <span className="text-xs">Credit Cart</span>
                             </ButtonIcon>
-                            <ButtonIcon className="w-32 h-24 rounded-md shadow-md p-2">
+                            <ButtonIcon
+                                className={`w-32 h-28 rounded-md shadow-md p-2 ${
+                                    method == "bank_transfer" &&
+                                    "bg-neutral-focus"
+                                }`}
+                                onClick={() =>
+                                    handleChangeMethod("bank_transfer")
+                                }
+                            >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     className="icon icon-tabler icon-tabler-building-bank w-16 h-16"
@@ -93,9 +127,15 @@ function page() {
                                     <path d="M12 14l0 3"></path>
                                     <path d="M16 14l0 3"></path>
                                 </svg>
-                                <span className="text-xs">Bank Transfer</span>
+                                <span className="text-xs">
+                                    Bank Transfer &#40;VA&#41;
+                                </span>
                             </ButtonIcon>
-                            <ButtonIcon className="w-32 h-24 rounded-md shadow-md p-2">
+                            <ButtonIcon
+                                className={`w-32 h-28 rounded-md shadow-md p-2 ${
+                                    method == "ewallet" && "bg-neutral-focus"
+                                }`}
+                            >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -112,7 +152,11 @@ function page() {
                                 </svg>
                                 <span className="text-xs">E-Wallet</span>
                             </ButtonIcon>
-                            <ButtonIcon className="w-32 h-24 rounded-md shadow-md p-2">
+                            <ButtonIcon
+                                className={`w-32 h-28 rounded-md shadow-md p-2 ${
+                                    method == "cod" && "bg-neutral-focus"
+                                }`}
+                            >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -136,51 +180,12 @@ function page() {
                             onSubmit={onSubmit}
                         >
                             {(props) => {
-                                return (
-                                    <div className="w-full h-full flex gap-x-10">
-                                        <div className="w-1/2">
-                                            <div>
-                                                <Label label="CARD NUMBER" />
-                                                <Input
-                                                    className=""
-                                                    name="card_number"
-                                                />
-                                            </div>
-                                            <div>
-                                                <Label label="CARD HOLDER NAME" />
-                                                <Input
-                                                    className=""
-                                                    name="card_holder_name"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="w-1/2">
-                                            <div>
-                                                <Label label="EXPIRATION DATE" />
-                                                <Input
-                                                    className=""
-                                                    name="card_number"
-                                                />
-                                            </div>
-                                            <div>
-                                                <Label label="CVV" />
-                                                <Input
-                                                    className=""
-                                                    name="cvv"
-                                                />
-                                            </div>
-                                            <div className="mt-2 flex items-center justify-end">
-                                                <Button className="bg-rose-600 rounded-none px-0 group">
-                                                    <span className="p-0 m-0 h-full bg-rose-800 flex items-center px-3 group-hover:bg-inherit">
-                                                        Rp.28.000
-                                                    </span>
-                                                    <span className="p-0 m-0 px-3">
-                                                        Pay
-                                                    </span>
-                                                </Button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                return method == "credit_card" ? (
+                                    <CreditCard />
+                                ) : method == "bank_transfer" ? (
+                                    <BankTransfer />
+                                ) : (
+                                    ""
                                 );
                             }}
                         </Formik>
@@ -191,4 +196,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;

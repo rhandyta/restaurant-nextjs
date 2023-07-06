@@ -29,24 +29,28 @@ function RowTableCart({ product, token, refreshCart, setSubTotal }) {
     };
 
     const quantityCartItem = async (id, preference) => {
-        if (isLoadingQuantity) return false;
+        try {
+            if (isLoadingQuantity) return false;
 
-        if (preference === "increment") {
-            setIsLoadingQuantity(true);
-            await incrementQuantity(id, setIsLoadingQuantity, token);
-            refreshCart(token);
-            setSubTotal((prev) => prev + Number(product.product.price));
-            setIsLoadingQuantity(false);
-            return true;
-        }
+            if (preference === "increment") {
+                setIsLoadingQuantity(true);
+                await incrementQuantity(id, setIsLoadingQuantity, token);
+                refreshCart(token);
+                setSubTotal((prev) => prev + Number(product.product.price));
+                setIsLoadingQuantity(false);
+                return true;
+            }
 
-        if (preference === "decrement") {
-            setIsLoadingQuantity(true);
-            await decrementQuantity(id, setIsLoadingQuantity, token);
-            refreshCart(token);
-            setSubTotal((prev) => prev - Number(product.product.price));
-            setIsLoadingQuantity(false);
-            return true;
+            if (preference === "decrement") {
+                setIsLoadingQuantity(true);
+                await decrementQuantity(id, setIsLoadingQuantity, token);
+                refreshCart(token);
+                setSubTotal((prev) => prev - Number(product.product.price));
+                setIsLoadingQuantity(false);
+                return true;
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
 
