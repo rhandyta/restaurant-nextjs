@@ -49,13 +49,6 @@ function RowTableCart({ product, token, refreshCart, setSubTotal }) {
             return true;
         }
     };
-    // const decrementCartItem = async (id) => {
-    //     if (isLoadingQuantity) return false;
-    //     setIsLoadingQuantity(true);
-    //     await decrementQuantity(id, setIsLoadingQuantity, token);
-    //     refreshCart(token);
-    //     setSubTotal((prev) => prev - Number(product.product.price));
-    // };
 
     useEffect(() => {
         setSubTotal(

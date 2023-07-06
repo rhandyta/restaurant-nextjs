@@ -83,7 +83,7 @@ function Cart() {
                                 <p>
                                     Discount:{" "}
                                     <span className="text-rose-600">
-                                        Rp{prices.discount}
+                                        Rp{convertRupiah(prices.discount)}
                                     </span>
                                 </p>
                                 <p className="font-semibold text-slate-800">

@@ -1,4 +1,8 @@
-import { toastError, toastSuccess } from "@/components/ToastComponent";
+import {
+    toastError,
+    toastSuccess,
+    toastWarning,
+} from "@/components/ToastComponent";
 
 export const useGetCart = async (token) => {
     try {
@@ -11,9 +15,13 @@ export const useGetCart = async (token) => {
             },
         });
         const response = await request.json();
+        if (response.status_code !== 200) {
+            throw Error("Too many request");
+        }
         return response;
     } catch (error) {
-        console.log(error);
+        toastWarning(error);
+        return window.location.reload();
     }
 };
 
