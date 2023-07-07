@@ -26,10 +26,13 @@ function Cart() {
     };
 
     useEffect(() => {
+        let jumlahDiscount = (Number(cart.subTotal) * 0) / 100;
+        let subTotalDiscount = Number(cart.subTotal) - jumlahDiscount;
+        let ppn = (subTotalDiscount * 11) / 100;
         setPrices({
-            subTotal: cart.subTotal,
+            subTotal: Number(cart.subTotal),
             discount: cart.discount,
-            total: cart.total,
+            total: Math.floor(subTotalDiscount + ppn),
         });
     }, [cart]);
 
@@ -75,16 +78,17 @@ function Cart() {
                         <div className="bg-rose-200 h-[55%] p-5">
                             <div className="border-b-2 border-rose-400">
                                 <p>
-                                    Total Price:{" "}
+                                    Sub Total:{" "}
                                     <span className="font-medium">
                                         Rp{convertRupiah(prices.subTotal)}
                                     </span>
                                 </p>
                                 <p>
                                     Discount:{" "}
-                                    <span className="text-rose-600">
-                                        Rp{convertRupiah(prices.discount)}
-                                    </span>
+                                    <span className="text-rose-600">0%</span>
+                                </p>
+                                <p>
+                                    PPN: <span>11%</span>
                                 </p>
                                 <p className="font-semibold text-slate-800">
                                     Total: Rp{convertRupiah(prices.total)}

@@ -14,6 +14,7 @@ function Table() {
 
     const [subTotal, setSubTotal] = useState(0);
     const [discount, setDiscount] = useState(0);
+    const [ppn, setPpn] = useState(0);
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -63,11 +64,12 @@ function Table() {
                 ...prev,
                 subTotal,
                 discount,
-                total: subTotal - discount,
+                total: Number(subTotal) - Number(ppn),
                 item: JSON.stringify(carts),
             };
         });
     }, [subTotal, carts]);
+    console.log(ppn);
 
     return (
         <table className="table w-full">

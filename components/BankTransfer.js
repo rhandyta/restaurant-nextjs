@@ -22,7 +22,7 @@ function BankTransfer() {
                 console.log(error);
             });
     }, []);
-    console.log(table);
+
     return (
         <Form className="w-full h-full flex gap-x-10">
             <div className="w-full">

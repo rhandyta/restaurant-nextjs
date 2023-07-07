@@ -52,7 +52,6 @@ function Page(props) {
                 setMethod("cod");
         }
     };
-    console.log(method);
 
     return (
         <main>
@@ -71,8 +70,7 @@ function Page(props) {
                         <div className="flex justify-center items-center gap-10">
                             <ButtonIcon
                                 className={`w-32 h-28 rounded-md shadow-md p-2 ${
-                                    method == "credit_card" &&
-                                    "bg-neutral-focus"
+                                    method == "credit_card" && "bg-neutral"
                                 }`}
                                 onClick={() =>
                                     handleChangeMethod("credit_card")
@@ -96,8 +94,7 @@ function Page(props) {
                             </ButtonIcon>
                             <ButtonIcon
                                 className={`w-32 h-28 rounded-md shadow-md p-2 ${
-                                    method == "bank_transfer" &&
-                                    "bg-neutral-focus"
+                                    method == "bank_transfer" && "bg-neutral"
                                 }`}
                                 onClick={() =>
                                     handleChangeMethod("bank_transfer")
@@ -133,7 +130,7 @@ function Page(props) {
                             </ButtonIcon>
                             <ButtonIcon
                                 className={`w-32 h-28 rounded-md shadow-md p-2 ${
-                                    method == "ewallet" && "bg-neutral-focus"
+                                    method == "ewallet" && "bg-neutral"
                                 }`}
                             >
                                 <svg
@@ -154,7 +151,7 @@ function Page(props) {
                             </ButtonIcon>
                             <ButtonIcon
                                 className={`w-32 h-28 rounded-md shadow-md p-2 ${
-                                    method == "cod" && "bg-neutral-focus"
+                                    method == "cod" && "bg-neutral"
                                 }`}
                             >
                                 <svg
