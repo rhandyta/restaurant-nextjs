@@ -10,7 +10,7 @@ import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import * as yup from "yup";
 function Cart() {
-    const { cart } = useContext(CartContext);
+    const { cart, setCart } = useContext(CartContext);
     const [prices, setPrices] = useState({});
 
     const initialValues = {
@@ -98,7 +98,7 @@ function Cart() {
                                 <Link
                                     href={{
                                         pathname: "/checkout",
-                                        query: cart,
+                                        query: prices,
                                     }}
                                 >
                                     <Button

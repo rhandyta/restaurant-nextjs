@@ -7,7 +7,7 @@ import HeaderRes from "@/components/HeaderRes";
 import CreditCard from "@/components/CreditCard";
 import BankTransfer from "@/components/BankTransfer";
 
-function Page(props) {
+function Page({ searchParams }) {
     const [method, setMethod] = useState("bank_transfer");
 
     const initialValues = {
@@ -52,6 +52,7 @@ function Page(props) {
                 setMethod("cod");
         }
     };
+    console.log({ searchParams });
 
     return (
         <main>
@@ -180,7 +181,7 @@ function Page(props) {
                                 return method == "credit_card" ? (
                                     <CreditCard />
                                 ) : method == "bank_transfer" ? (
-                                    <BankTransfer />
+                                    <BankTransfer prices={searchParams} />
                                 ) : (
                                     ""
                                 );

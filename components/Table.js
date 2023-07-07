@@ -31,10 +31,10 @@ function Table() {
                 })
                 .catch((error) => {
                     console.log(error);
-                    setIsLoading(false); // Ubah menjadi false jika terjadi error
+                    setIsLoading(false);
                 });
         } else {
-            setIsLoading(false); // Ubah menjadi false jika token tidak tersedia
+            setIsLoading(false);
         }
     };
 
@@ -69,7 +69,6 @@ function Table() {
             };
         });
     }, [subTotal, carts]);
-    console.log(ppn);
 
     return (
         <table className="table w-full">

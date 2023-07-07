@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import Label from "./Label";
 import Input from "./Input";
 import Button from "./Button";
-import { staticMethodPayment } from "@/utils/utils";
+import { convertRupiah, staticMethodPayment } from "@/utils/utils";
 import { UserContext } from "@/context/user-context";
 import { useGetTables } from "@/hooks/useGetTables";
 import { Form } from "formik";
 
-function BankTransfer() {
+function BankTransfer({ prices }) {
     const { token } = useContext(UserContext);
     const getTables = useGetTables(token);
     const [tables, setTables] = useState([]);
@@ -74,7 +74,7 @@ function BankTransfer() {
                 <div className="mt-2 flex items-center justify-end">
                     <Button className="bg-rose-600 rounded-none px-0 group">
                         <span className="p-0 m-0 h-full bg-rose-800 flex items-center px-3 group-hover:bg-inherit">
-                            Rp.28.000
+                            Rp{convertRupiah(Number(prices.total))}
                         </span>
                         <span className="p-0 m-0 px-3">Pay</span>
                     </Button>
