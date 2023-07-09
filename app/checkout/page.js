@@ -1,11 +1,12 @@
 "use client";
 import ButtonIcon from "@/components/ButtonIcon";
 import React, { useState } from "react";
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as yup from "yup";
 import HeaderRes from "@/components/HeaderRes";
 import CreditCard from "@/components/CreditCard";
 import BankTransfer from "@/components/BankTransfer";
+import Button from "@/components/Button";
 
 function Page({ searchParams }) {
     const [method, setMethod] = useState("bank_transfer");
@@ -14,7 +15,8 @@ function Page({ searchParams }) {
         payment_type: "",
         bank: "",
         notes: "",
-        table: "",
+        tables: 0,
+        table: 0,
         detail_orders: [],
     };
 
@@ -34,7 +36,7 @@ function Page({ searchParams }) {
     });
 
     const onSubmit = (values, props) => {
-        //
+        console.log({ values, props });
     };
 
     const handleChangeMethod = (method) => {
@@ -173,16 +175,25 @@ function Page({ searchParams }) {
                         </div>
                         <Formik
                             initialValues={initialValues}
-                            validationSchema={validationSchema}
                             onSubmit={onSubmit}
+                            validationSchema={validationSchema}
                         >
                             {(props) => {
-                                return method == "credit_card" ? (
-                                    <CreditCard />
-                                ) : method == "bank_transfer" ? (
-                                    <BankTransfer prices={searchParams} />
-                                ) : (
-                                    ""
+                                console.log(props);
+                                return (
+                                    <Form>
+                                        {method == "credit_card" ? (
+                                            <CreditCard values={props.values} />
+                                        ) : method == "bank_transfer" ? (
+                                            <BankTransfer
+                                                prices={searchParams}
+                                                values={props.values}
+                                            />
+                                        ) : (
+                                            ""
+                                        )}
+                                        <Button type="submit" text="ok" />
+                                    </Form>
                                 );
                             }}
                         </Formik>

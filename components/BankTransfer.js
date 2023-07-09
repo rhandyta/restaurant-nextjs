@@ -5,41 +5,47 @@ import Button from "./Button";
 import { convertRupiah, staticMethodPayment } from "@/utils/utils";
 import { UserContext } from "@/context/user-context";
 import { useGetTableCategories, useGetTable } from "@/hooks/useGetTables";
-import { Form } from "formik";
 
-function BankTransfer({ prices }) {
-    const { token } = useContext(UserContext);
+function BankTransfer({ prices, values }) {
+    const { token = null } = useContext(UserContext);
 
     const [tables, setTables] = useState([]);
-    const [tableId, setIdTable] = useState(0);
     const [table, setTable] = useState([]);
 
-    const getTableCategories = useGetTableCategories(token);
-    const getTable = useGetTable(tableId, token);
-    useEffect(() => {
-        getTableCategories
-            .then((res) => {
-                setTables(res);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
+    const getTableCategories = useGetTableCategories;
+    const getTable = useGetTable;
 
     useEffect(() => {
-        if (tableId) {
-            getTable
+        if (token) {
+            getTableCategories(token)
                 .then((res) => {
-                    setTable(res);
+                    setTables(res);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
+        } else {
+            setTables([]); // Mengatur tabel ke nilai awal yang kosong jika token belum tersedia
         }
-    }, [tableId]);
+
+        if (values.tables) {
+            getTableHandle(values.tables);
+        } else {
+            setTable([]);
+        }
+    }, [token, values]);
+
+    const getTableHandle = async (id) => {
+        try {
+            const request = await getTable(id, token);
+            setTable(request);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
-        <Form className="w-full h-full flex gap-x-10">
+        <div className="w-full h-full flex gap-x-10">
             <div className="w-full">
                 <div>
                     <Label label="CHOOSE BANK" />
@@ -48,6 +54,9 @@ function BankTransfer({ prices }) {
                         component="select"
                         name="bank"
                     >
+                        <option disabled key={"default"} value={""}>
+                            --CHOOSE BANK VA--
+                        </option>
                         {staticMethodPayment.bank_transfer.map((value) => (
                             <option
                                 key={value.id}
@@ -76,9 +85,10 @@ function BankTransfer({ prices }) {
                         className="select select-secondary select-sm w-full font-semibold uppercase text-rose-600"
                         name="tables"
                         component="select"
-                        onChange={(event) => setIdTable(event.target.value)}
-                        value={tableId}
                     >
+                        <option disabled key={"default"} value={0}>
+                            --CHOOSE TABLE CATEGORIES--
+                        </option>
                         {tables?.map((table) => (
                             <option key={table.id} value={table.id}>
                                 {table.category}
@@ -86,18 +96,28 @@ function BankTransfer({ prices }) {
                         ))}
                     </Input>
                 </div>
-                <div>
-                    {/* <Label label="TABLE #" />
+                <div className={values?.tables == 0 ? "hidden" : ""}>
+                    <Label label="TABLE #" />
                     <Input
                         className="select select-secondary select-sm w-full font-semibold uppercase text-rose-600"
                         name="table"
                         component="select"
                     >
-                        <option value="">H</option>
-                    </Input> */}
+                        <option disabled key={"default"} value={0}>
+                            --CHOOSE TABLE--
+                        </option>
+                        {table?.map((item) => (
+                            <option key={item.id} value={item.id}>
+                                {item.no}
+                            </option>
+                        ))}
+                    </Input>
                 </div>
                 <div className="mt-2 flex items-center justify-end">
-                    <Button className="bg-rose-600 rounded-none px-0 group">
+                    <Button
+                        className="bg-rose-600 rounded-none px-0 group"
+                        type="submit"
+                    >
                         <span className="p-0 m-0 h-full bg-rose-800 flex items-center px-3 group-hover:bg-inherit">
                             Rp{convertRupiah(Number(prices.total))}
                         </span>
@@ -105,7 +125,7 @@ function BankTransfer({ prices }) {
                     </Button>
                 </div>
             </div>
-        </Form>
+        </div>
     );
 }
 
