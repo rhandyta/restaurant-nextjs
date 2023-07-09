@@ -52,7 +52,6 @@ function Page({ searchParams }) {
                 setMethod("cod");
         }
     };
-    console.log({ searchParams });
 
     return (
         <main>

@@ -4,17 +4,20 @@ import Input from "./Input";
 import Button from "./Button";
 import { convertRupiah, staticMethodPayment } from "@/utils/utils";
 import { UserContext } from "@/context/user-context";
-import { useGetTables } from "@/hooks/useGetTables";
+import { useGetTableCategories, useGetTable } from "@/hooks/useGetTables";
 import { Form } from "formik";
 
 function BankTransfer({ prices }) {
     const { token } = useContext(UserContext);
-    const getTables = useGetTables(token);
-    const [tables, setTables] = useState([]);
-    const [table, setTable] = useState(0);
 
+    const [tables, setTables] = useState([]);
+    const [tableId, setIdTable] = useState(0);
+    const [table, setTable] = useState([]);
+
+    const getTableCategories = useGetTableCategories(token);
+    const getTable = useGetTable(tableId, token);
     useEffect(() => {
-        getTables
+        getTableCategories
             .then((res) => {
                 setTables(res);
             })
@@ -22,6 +25,18 @@ function BankTransfer({ prices }) {
                 console.log(error);
             });
     }, []);
+
+    useEffect(() => {
+        if (tableId) {
+            getTable
+                .then((res) => {
+                    setTable(res);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [tableId]);
 
     return (
         <Form className="w-full h-full flex gap-x-10">
@@ -56,13 +71,13 @@ function BankTransfer({ prices }) {
             </div>
             <div className="w-1/2">
                 <div>
-                    <Label label="TABLE #" />
+                    <Label label="TABLE CATEGORY #" />
                     <Input
                         className="select select-secondary select-sm w-full font-semibold uppercase text-rose-600"
                         name="tables"
                         component="select"
-                        onChange={(event) => setTable(event.target.value)}
-                        value={table}
+                        onChange={(event) => setIdTable(event.target.value)}
+                        value={tableId}
                     >
                         {tables?.map((table) => (
                             <option key={table.id} value={table.id}>
@@ -70,6 +85,16 @@ function BankTransfer({ prices }) {
                             </option>
                         ))}
                     </Input>
+                </div>
+                <div>
+                    {/* <Label label="TABLE #" />
+                    <Input
+                        className="select select-secondary select-sm w-full font-semibold uppercase text-rose-600"
+                        name="table"
+                        component="select"
+                    >
+                        <option value="">H</option>
+                    </Input> */}
                 </div>
                 <div className="mt-2 flex items-center justify-end">
                     <Button className="bg-rose-600 rounded-none px-0 group">

@@ -48,7 +48,7 @@ function Cart() {
                             <Table />
                         </div>
                     </div>
-                    <div className="w-[20%] min-h-max flex flex-col justify-between">
+                    <div className="w-[20%] min-h-max h-fit flex flex-col justify-between">
                         <div className="bg-rose-200 h-[35%] flex flex-col justify-center p-5">
                             <p>Have a coupon?</p>
                             <div className="flex mt-2">
