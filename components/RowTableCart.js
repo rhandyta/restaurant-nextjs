@@ -111,7 +111,7 @@ function RowTableCart({ product, token, refreshCart, setSubTotal }) {
             <td>
                 <span className="font-bold">
                     Rp
-                    {convertRupiah(product.quantity * product.product.price)}
+                    {convertRupiah(Number(product.product.price))}
                 </span>
             </td>
             <th>

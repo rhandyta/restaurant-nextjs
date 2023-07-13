@@ -1,33 +1,38 @@
 "use client";
 import ButtonIcon from "@/components/ButtonIcon";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 import HeaderRes from "@/components/HeaderRes";
 import CreditCard from "@/components/CreditCard";
 import BankTransfer from "@/components/BankTransfer";
-import Button from "@/components/Button";
+import { CartContext } from "@/context/cart-context";
+import { useGetCart } from "../cart/useGetCart";
+import { UserContext } from "@/context/user-context";
 
 function Page({ searchParams }) {
+    const getCart = useGetCart;
+    const { token } = useContext(UserContext);
+    const {cart, setCart} = useContext(CartContext)
     const [method, setMethod] = useState("bank_transfer");
 
     const initialValues = {
-        payment_type: "",
+        payment_type: method,
         bank: "",
         notes: "",
         tables: 0,
         table: 0,
-        detail_orders: [],
+        detail_orders: {},
     };
 
     const validationSchema = yup.object({
         payment_type: yup.string().required(),
-        bank: yup.string().required(),
-        table: yup.string().min(3),
-        notes: yup.string().min(3).nullable(),
+        bank: yup.string().nullable(),
+        table: yup.string(),
+        notes: yup.string().nullable(),
         detail_orders: yup.array().of(
             yup.object().shape({
-                product: yup.string().required(),
+                product: yup.array().required(),
                 quantity: yup.number().required(),
                 unit_price: yup.number().required(),
                 discount: yup.number().required(),
@@ -36,7 +41,11 @@ function Page({ searchParams }) {
     });
 
     const onSubmit = (values, props) => {
-        console.log({ values, props });
+        const detail_orders = cart
+        console.log(detail_orders)
+        props.setFieldValue('detail_orders', detail_orders)
+        props.setFieldValue('payment_type', method)
+        console.log("values",{ values });
     };
 
     const handleChangeMethod = (method) => {
@@ -54,6 +63,21 @@ function Page({ searchParams }) {
                 setMethod("cod");
         }
     };
+
+    useEffect(() => {
+       if(token) {
+        getCart(token)
+        .then((res) => {
+            setCart(res.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+       } else {
+        setCart([]);
+       }
+    }, [token])
+    console.log(cart)
 
     return (
         <main>
@@ -179,20 +203,18 @@ function Page({ searchParams }) {
                             validationSchema={validationSchema}
                         >
                             {(props) => {
-                                console.log(props);
                                 return (
                                     <Form>
                                         {method == "credit_card" ? (
-                                            <CreditCard values={props.values} />
+                                           <CreditCard values={props.values} />
                                         ) : method == "bank_transfer" ? (
-                                            <BankTransfer
+                                           <BankTransfer
                                                 prices={searchParams}
                                                 values={props.values}
                                             />
                                         ) : (
                                             ""
                                         )}
-                                        <Button type="submit" text="ok" />
                                     </Form>
                                 );
                             }}

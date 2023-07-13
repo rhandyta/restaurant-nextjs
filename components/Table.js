@@ -9,7 +9,7 @@ import { UserContext } from "@/context/user-context";
 
 function Table() {
     const { token } = useContext(UserContext);
-    const { cart, setCart } = useContext(CartContext);
+    const { setCart } = useContext(CartContext);
     const [carts, setCarts] = useState(null);
 
     const [subTotal, setSubTotal] = useState(0);
@@ -23,7 +23,6 @@ function Table() {
     const getCartUser = () => {
         setIsLoading(true);
         if (token) {
-            // Tambahkan pengecekan apakah token tersedia
             getCart(token)
                 .then((res) => {
                     setCarts(res.data);
@@ -69,7 +68,6 @@ function Table() {
             };
         });
     }, [subTotal, carts]);
-
     return (
         <table className="table w-full">
             <thead>

@@ -46,9 +46,9 @@ function Register() {
         router.push("/auth/login");
     };
 
-    useEffect(() => {
-        if (data !== null) return router.push("/home");
-    }, []);
+    // useEffect(() => {
+    //     if (data !== null) return router.push("/home");
+    // }, []);
 
     return (
         <section className="h-96 md:h-auto w-full">

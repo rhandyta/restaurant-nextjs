@@ -5,6 +5,7 @@ import Button from "./Button";
 import { convertRupiah, staticMethodPayment } from "@/utils/utils";
 import { UserContext } from "@/context/user-context";
 import { useGetTableCategories, useGetTable } from "@/hooks/useGetTables";
+import ErrorMessageField from "./ErrorMessageField";
 
 function BankTransfer({ prices, values }) {
     const { token = null } = useContext(UserContext);
@@ -25,7 +26,7 @@ function BankTransfer({ prices, values }) {
                     console.log(error);
                 });
         } else {
-            setTables([]); // Mengatur tabel ke nilai awal yang kosong jika token belum tersedia
+            setTables([]); 
         }
 
         if (values.tables) {
@@ -66,7 +67,8 @@ function BankTransfer({ prices, values }) {
                                 {value.bank}
                             </option>
                         ))}
-                    </Input>
+                    </Input>  
+                    <ErrorMessageField name="bank" />
                 </div>
                 <div>
                     <Label label="NOTES" />
@@ -76,6 +78,8 @@ function BankTransfer({ prices, values }) {
                         as="textarea"
                         name="notes"
                     />
+                        
+                    <ErrorMessageField name="notes" />
                 </div>
             </div>
             <div className="w-1/2">
@@ -95,6 +99,7 @@ function BankTransfer({ prices, values }) {
                             </option>
                         ))}
                     </Input>
+                    <ErrorMessageField name="tables" />
                 </div>
                 <div className={values?.tables == 0 ? "hidden" : ""}>
                     <Label label="TABLE #" />
@@ -108,10 +113,11 @@ function BankTransfer({ prices, values }) {
                         </option>
                         {table?.map((item) => (
                             <option key={item.id} value={item.id}>
-                                {item.no}
+                                {item.id}
                             </option>
                         ))}
                     </Input>
+                    <ErrorMessageField name="table" />
                 </div>
                 <div className="mt-2 flex items-center justify-end">
                     <Button

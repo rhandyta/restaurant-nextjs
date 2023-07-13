@@ -35,7 +35,6 @@ function Cart() {
             total: Math.floor(subTotalDiscount + ppn),
         });
     }, [cart]);
-
     return (
         <main>
             <div className="bg-rose-100 px-20 w-full m-0">
