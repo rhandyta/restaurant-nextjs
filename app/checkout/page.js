@@ -1,20 +1,23 @@
 "use client";
 import ButtonIcon from "@/components/ButtonIcon";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 import HeaderRes from "@/components/HeaderRes";
 import CreditCard from "@/components/CreditCard";
 import BankTransfer from "@/components/BankTransfer";
-import { CartContext } from "@/context/cart-context";
 import { useGetCart } from "../cart/useGetCart";
 import { UserContext } from "@/context/user-context";
+import {useStoreOrder} from "./useStoreOrder"
 
 function Page({ searchParams }) {
     const getCart = useGetCart;
+    const storeOrder = useStoreOrder
     const { token } = useContext(UserContext);
-    const {cart, setCart} = useContext(CartContext)
     const [method, setMethod] = useState("bank_transfer");
+    const [isLoading, setIsLoading] = useState(false);
+
+    const cart = useRef([]);
 
     const initialValues = {
         payment_type: method,
@@ -22,30 +25,20 @@ function Page({ searchParams }) {
         notes: "",
         tables: 0,
         table: 0,
-        detail_orders: {},
+        detail_orders: [],
     };
 
     const validationSchema = yup.object({
         payment_type: yup.string().required(),
         bank: yup.string().nullable(),
-        table: yup.string(),
+        table: yup.string().required(),
         notes: yup.string().nullable(),
-        detail_orders: yup.array().of(
-            yup.object().shape({
-                product: yup.array().required(),
-                quantity: yup.number().required(),
-                unit_price: yup.number().required(),
-                discount: yup.number().required(),
-            })
-        ),
     });
 
-    const onSubmit = (values, props) => {
-        const detail_orders = cart
-        console.log(detail_orders)
-        props.setFieldValue('detail_orders', detail_orders)
-        props.setFieldValue('payment_type', method)
-        console.log("values",{ values });
+    const onSubmit = (values) => {
+      setIsLoading(true)
+      const orders = { ...values, detail_orders: [...cart.current]}
+      storeOrder(orders, token, setIsLoading)
     };
 
     const handleChangeMethod = (method) => {
@@ -65,20 +58,18 @@ function Page({ searchParams }) {
     };
 
     useEffect(() => {
-       if(token) {
-        getCart(token)
-        .then((res) => {
-            setCart(res.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-       } else {
-        setCart([]);
-       }
-    }, [token])
-    console.log(cart)
-
+        if (token) {
+            getCart(token)
+                .then((res) => {
+                    cart.current = res.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            cart.current = [];
+        }
+    }, [token]);
     return (
         <main>
             <div className="bg-rose-100 px-20 w-full m-0">
@@ -94,7 +85,7 @@ function Page({ searchParams }) {
                             Choose a payment method
                         </div>
                         <div className="flex justify-center items-center gap-10">
-                            <ButtonIcon
+                            {/* <ButtonIcon
                                 className={`w-32 h-28 rounded-md shadow-md p-2 ${
                                     method == "credit_card" && "bg-neutral"
                                 }`}
@@ -117,10 +108,10 @@ function Page({ searchParams }) {
                                     />
                                 </svg>
                                 <span className="text-xs">Credit Cart</span>
-                            </ButtonIcon>
+                            </ButtonIcon> */}
                             <ButtonIcon
                                 className={`w-32 h-28 rounded-md shadow-md p-2 ${
-                                    method == "bank_transfer" && "bg-neutral"
+                                    method == "bank_transfer" && "bg-neutral-focus" 
                                 }`}
                                 onClick={() =>
                                     handleChangeMethod("bank_transfer")
@@ -154,7 +145,7 @@ function Page({ searchParams }) {
                                     Bank Transfer &#40;VA&#41;
                                 </span>
                             </ButtonIcon>
-                            <ButtonIcon
+                            {/* <ButtonIcon
                                 className={`w-32 h-28 rounded-md shadow-md p-2 ${
                                     method == "ewallet" && "bg-neutral"
                                 }`}
@@ -174,11 +165,14 @@ function Page({ searchParams }) {
                                     />
                                 </svg>
                                 <span className="text-xs">E-Wallet</span>
-                            </ButtonIcon>
+                            </ButtonIcon> */}
                             <ButtonIcon
                                 className={`w-32 h-28 rounded-md shadow-md p-2 ${
-                                    method == "cod" && "bg-neutral"
+                                    method == "cod" && "bg-neutral-focus" 
                                 }`}
+                                onClick={() =>
+                                    handleChangeMethod("cod")
+                                }
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -206,9 +200,11 @@ function Page({ searchParams }) {
                                 return (
                                     <Form>
                                         {method == "credit_card" ? (
-                                           <CreditCard values={props.values} />
+                                            {
+                                                /* <CreditCard values={props.values} /> */
+                                            }
                                         ) : method == "bank_transfer" ? (
-                                           <BankTransfer
+                                            <BankTransfer
                                                 prices={searchParams}
                                                 values={props.values}
                                             />
