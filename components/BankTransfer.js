@@ -6,8 +6,9 @@ import { convertRupiah, staticMethodPayment } from "@/utils/utils";
 import { UserContext } from "@/context/user-context";
 import { useGetTableCategories, useGetTable } from "@/hooks/useGetTables";
 import ErrorMessageField from "./ErrorMessageField";
+import ButtonLoading from "./ButtonLoading";
 
-function BankTransfer({ prices, values }) {
+function BankTransfer({ prices, values, isLoading }) {
     const { token = null } = useContext(UserContext);
 
     const [tables, setTables] = useState([]);
@@ -26,7 +27,7 @@ function BankTransfer({ prices, values }) {
                     console.log(error);
                 });
         } else {
-            setTables([]); 
+            setTables([]);
         }
 
         if (values.tables) {
@@ -67,7 +68,7 @@ function BankTransfer({ prices, values }) {
                                 {value.bank}
                             </option>
                         ))}
-                    </Input>  
+                    </Input>
                     <ErrorMessageField name="bank" />
                 </div>
                 <div>
@@ -78,7 +79,7 @@ function BankTransfer({ prices, values }) {
                         as="textarea"
                         name="notes"
                     />
-                        
+
                     <ErrorMessageField name="notes" />
                 </div>
             </div>
@@ -120,15 +121,19 @@ function BankTransfer({ prices, values }) {
                     <ErrorMessageField name="table" />
                 </div>
                 <div className="mt-2 flex items-center justify-end">
-                    <Button
-                        className="bg-rose-600 rounded-none px-0 group"
-                        type="submit"
-                    >
-                        <span className="p-0 m-0 h-full bg-rose-800 flex items-center px-3 group-hover:bg-inherit">
-                            Rp{convertRupiah(Number(prices.total))}
-                        </span>
-                        <span className="p-0 m-0 px-3">Pay</span>
-                    </Button>
+                    {isLoading ? (
+                        <ButtonLoading />
+                    ) : (
+                        <Button
+                            className="bg-rose-600 rounded-none px-0 group"
+                            type="submit"
+                        >
+                            <span className="p-0 m-0 h-full bg-rose-800 flex items-center px-3 group-hover:bg-inherit">
+                                Rp{convertRupiah(Number(prices.total))}
+                            </span>
+                            <span className="p-0 m-0 px-3">Pay</span>
+                        </Button>
+                    )}
                 </div>
             </div>
         </div>

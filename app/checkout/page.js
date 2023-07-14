@@ -8,11 +8,11 @@ import CreditCard from "@/components/CreditCard";
 import BankTransfer from "@/components/BankTransfer";
 import { useGetCart } from "../cart/useGetCart";
 import { UserContext } from "@/context/user-context";
-import {useStoreOrder} from "./useStoreOrder"
+import { useStoreOrder } from "./useStoreOrder";
 
 function Page({ searchParams }) {
     const getCart = useGetCart;
-    const storeOrder = useStoreOrder
+    const storeOrder = useStoreOrder;
     const { token } = useContext(UserContext);
     const [method, setMethod] = useState("bank_transfer");
     const [isLoading, setIsLoading] = useState(false);
@@ -36,9 +36,9 @@ function Page({ searchParams }) {
     });
 
     const onSubmit = (values) => {
-      setIsLoading(true)
-      const orders = { ...values, detail_orders: [...cart.current]}
-      storeOrder(orders, token, setIsLoading)
+        setIsLoading(true);
+        const orders = { ...values, detail_orders: [...cart.current] };
+        storeOrder(orders, token, setIsLoading);
     };
 
     const handleChangeMethod = (method) => {
@@ -111,7 +111,8 @@ function Page({ searchParams }) {
                             </ButtonIcon> */}
                             <ButtonIcon
                                 className={`w-32 h-28 rounded-md shadow-md p-2 ${
-                                    method == "bank_transfer" && "bg-neutral-focus" 
+                                    method == "bank_transfer" &&
+                                    "bg-neutral-focus"
                                 }`}
                                 onClick={() =>
                                     handleChangeMethod("bank_transfer")
@@ -168,11 +169,9 @@ function Page({ searchParams }) {
                             </ButtonIcon> */}
                             <ButtonIcon
                                 className={`w-32 h-28 rounded-md shadow-md p-2 ${
-                                    method == "cod" && "bg-neutral-focus" 
+                                    method == "cod" && "bg-neutral-focus"
                                 }`}
-                                onClick={() =>
-                                    handleChangeMethod("cod")
-                                }
+                                onClick={() => handleChangeMethod("cod")}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -207,6 +206,7 @@ function Page({ searchParams }) {
                                             <BankTransfer
                                                 prices={searchParams}
                                                 values={props.values}
+                                                isLoading={isLoading}
                                             />
                                         ) : (
                                             ""
