@@ -1,22 +1,27 @@
+import { convertRupiah } from "@/utils/utils";
 import Link from "next/link";
+import moment from "moment/moment";
 
-export default function CardTransaction() {
+export default function CardTransaction({ transaction }) {
+    const createTransaction = moment(transaction.created_at).locale("id");
     return (
         <div className="w-full h-40 bg-rose-100 rounded-md shadow-md p-4 flex flex-col justify-between">
             <div className="flex gap-3 items-center">
                 <div className="font-bold text-lg">
-                    <p>OR150723m8VCFY</p>
+                    <p>{transaction.order_id}</p>
                 </div>
                 <div className="text-base">
-                    <p>16 Juli 2023</p>
+                    <p>
+                        {createTransaction.format("dddd, MMMM YYYY, kk:mm A")}
+                    </p>
                 </div>
                 <div className="uppercase ">
                     <div className="badge badge-success text-lime-100">
-                        succeed
+                        {transaction.transaction_status}
                     </div>
                 </div>
                 <div className="text-sm font-thin">
-                    <p>2896c8da-c698-4ea9-8cf5-a8512ee6b27e</p>
+                    <p>{transaction.transaction_id}</p>
                 </div>
             </div>
             <div className="grid grid-cols-6 gap-0 divide-x-2 divide-rose-200">
@@ -24,8 +29,8 @@ export default function CardTransaction() {
                     <div className="font-bold text-lg">
                         <p>Tagihan</p>
                     </div>
-                    <div className="text-slate-500">
-                        <p>32432423****</p>
+                    <div className="text-slate-500 uppercase">
+                        <p>{`${transaction.bank} ${transaction.va_number}`}</p>
                     </div>
                 </div>
                 <div className="pl-3">
@@ -33,7 +38,9 @@ export default function CardTransaction() {
                         <p>Total Price</p>
                     </div>
                     <div className="font-bold">
-                        <p>Rp23.589</p>
+                        <p>
+                            Rp{convertRupiah(Number(transaction.gross_amount))}
+                        </p>
                     </div>
                 </div>
             </div>
