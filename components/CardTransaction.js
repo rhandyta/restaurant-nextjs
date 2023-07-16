@@ -4,6 +4,20 @@ import moment from "moment/moment";
 
 export default function CardTransaction({ transaction }) {
     const createTransaction = moment(transaction.created_at).locale("id");
+    console.log(
+        transaction.transaction_status == "settlement"
+            ? "success"
+            : transaction.transaction_status == "pending"
+            ? "primary"
+            : transaction.transaction_status == "cancel"
+            ? "error"
+            : transaction.transaction_status == "expire"
+            ? "warning"
+            : transaction.transaction_status == "deny"
+            ? "error"
+            : "default"
+    );
+
     return (
         <div className="w-full h-40 bg-rose-100 rounded-md shadow-md p-4 flex flex-col justify-between">
             <div className="flex gap-3 items-center">
@@ -15,10 +29,32 @@ export default function CardTransaction({ transaction }) {
                         {createTransaction.format("dddd, MMMM YYYY, kk:mm A")}
                     </p>
                 </div>
-                <div className="uppercase ">
-                    <div className="badge badge-success text-lime-100">
-                        {transaction.transaction_status}
-                    </div>
+                <div className="uppercase">
+                    {transaction.transaction_status == "settlement" ? (
+                        <div className="badge badge-success text-lime-100">
+                            {transaction.transaction_status}
+                        </div>
+                    ) : transaction.transaction_status == "pending" ? (
+                        <div className="badge badge-primary text-lime-100">
+                            {transaction.transaction_status}
+                        </div>
+                    ) : transaction.transaction_status == "cancel" ? (
+                        <div className="badge badge-error text-lime-100">
+                            {transaction.transaction_status}
+                        </div>
+                    ) : transaction.transaction_status == "expire" ? (
+                        <div className="badge badge-warning text-lime-100">
+                            {transaction.transaction_status}
+                        </div>
+                    ) : transaction.transaction_status == "deny" ? (
+                        <div className="badge badge-error text-lime-100">
+                            {transaction.transaction_status}
+                        </div>
+                    ) : (
+                        <div className="badge text-lime-100">
+                            {transaction.transaction_status}
+                        </div>
+                    )}
                 </div>
                 <div className="text-sm font-thin">
                     <p>{transaction.transaction_id}</p>

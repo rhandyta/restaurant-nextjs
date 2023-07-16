@@ -25,7 +25,6 @@ export default function Transaction() {
             setTransactions({});
         }
     }, [token]);
-    // console.log(transactions);
     return (
         <main>
             <div className="bg-rose-100 px-20 w-full m-0">
