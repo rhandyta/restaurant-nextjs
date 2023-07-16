@@ -111,8 +111,7 @@ function Page({ searchParams }) {
                             </ButtonIcon> */}
                             <ButtonIcon
                                 className={`w-32 h-28 rounded-md shadow-md p-2 ${
-                                    method == "bank_transfer" &&
-                                    "bg-neutral-focus"
+                                    method == "bank_transfer" && "bg-slate-800"
                                 }`}
                                 onClick={() =>
                                     handleChangeMethod("bank_transfer")
@@ -169,7 +168,7 @@ function Page({ searchParams }) {
                             </ButtonIcon> */}
                             <ButtonIcon
                                 className={`w-32 h-28 rounded-md shadow-md p-2 ${
-                                    method == "cod" && "bg-neutral-focus"
+                                    method == "cod" && "bg-slate-800"
                                 }`}
                                 onClick={() => handleChangeMethod("cod")}
                             >
