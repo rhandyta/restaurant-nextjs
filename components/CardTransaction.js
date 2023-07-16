@@ -4,19 +4,6 @@ import moment from "moment/moment";
 
 export default function CardTransaction({ transaction }) {
     const createTransaction = moment(transaction.created_at).locale("id");
-    console.log(
-        transaction.transaction_status == "settlement"
-            ? "success"
-            : transaction.transaction_status == "pending"
-            ? "primary"
-            : transaction.transaction_status == "cancel"
-            ? "error"
-            : transaction.transaction_status == "expire"
-            ? "warning"
-            : transaction.transaction_status == "deny"
-            ? "error"
-            : "default"
-    );
 
     return (
         <div className="w-full h-40 bg-rose-100 rounded-md shadow-md p-4 flex flex-col justify-between">
