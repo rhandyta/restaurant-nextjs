@@ -1,6 +1,7 @@
 import { convertRupiah } from "@/utils/utils";
 import Link from "next/link";
 import moment from "moment/moment";
+import StatusTransaction from "./StatusTransaction";
 
 export default function CardTransaction({ transaction }) {
     const createTransaction = moment(transaction.created_at).locale("id");
@@ -17,31 +18,9 @@ export default function CardTransaction({ transaction }) {
                     </p>
                 </div>
                 <div className="uppercase">
-                    {transaction.transaction_status == "settlement" ? (
-                        <div className="badge badge-success text-lime-100">
-                            {transaction.transaction_status}
-                        </div>
-                    ) : transaction.transaction_status == "pending" ? (
-                        <div className="badge badge-primary text-lime-100">
-                            {transaction.transaction_status}
-                        </div>
-                    ) : transaction.transaction_status == "cancel" ? (
-                        <div className="badge badge-error text-lime-100">
-                            {transaction.transaction_status}
-                        </div>
-                    ) : transaction.transaction_status == "expire" ? (
-                        <div className="badge badge-warning text-lime-100">
-                            {transaction.transaction_status}
-                        </div>
-                    ) : transaction.transaction_status == "deny" ? (
-                        <div className="badge badge-error text-lime-100">
-                            {transaction.transaction_status}
-                        </div>
-                    ) : (
-                        <div className="badge text-lime-100">
-                            {transaction.transaction_status}
-                        </div>
-                    )}
+                    <StatusTransaction
+                        status={transaction.transaction_status}
+                    />
                 </div>
                 <div className="text-sm font-thin">
                     <p>{transaction.transaction_id}</p>
@@ -69,7 +48,9 @@ export default function CardTransaction({ transaction }) {
             </div>
             <div className="flex justify-end items-center gap-3">
                 <div className="text-rose-600">
-                    <Link href="#">Transaction Detail</Link>
+                    <Link href={`/transaction/${transaction.transaction_id}`}>
+                        Transaction Detail
+                    </Link>
                 </div>
                 <div>
                     <div className="dropdown dropdown-end">
