@@ -44,10 +44,9 @@ function Page({ searchParams }) {
             setIsLoading(true);
             const orders = { ...values, detail_orders: [...cart.current] };
             const response = await storeOrder(orders, token, setIsLoading);
-            console.log(response);
             router.push(`/transaction/${response.data.order.transaction_id}`);
         } catch (error) {
-            toastError(error);
+            return false;
         }
     };
 

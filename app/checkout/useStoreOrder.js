@@ -24,6 +24,6 @@ export const useStoreOrder = async (order, token, setIsLoading) => {
     } catch (error) {
         setIsLoading(false);
         toastError(error);
-        return console.log(false);
+        return error;
     }
 };

@@ -127,7 +127,7 @@ function Page({ params }) {
                             </table>
                         </div>
                     </div>
-                    {!isLoading && (
+                    {!isLoading && transDetail && (
                         <div className="flex flex-col justify-evenly gap-3 font-thin leading-relaxed">
                             <div>
                                 <p>
@@ -193,6 +193,12 @@ function Page({ params }) {
                                     Payment Method:{" "}
                                     <span className="font-semibold uppercase">
                                         {transDetail.bank}
+                                    </span>
+                                </p>
+                                <p>
+                                    Payment VA:{" "}
+                                    <span className="font-semibold uppercase">
+                                        {transDetail.va_number}
                                     </span>
                                 </p>
                             </div>
