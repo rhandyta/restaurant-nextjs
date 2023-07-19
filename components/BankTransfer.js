@@ -8,7 +8,7 @@ import { useGetTableCategories, useGetTable } from "@/hooks/useGetTables";
 import ErrorMessageField from "./ErrorMessageField";
 import ButtonLoading from "./ButtonLoading";
 
-function BankTransfer({ prices, values, isLoading }) {
+function BankTransfer({ prices, values, isLoading, props }) {
     const { token = null } = useContext(UserContext);
 
     const [tables, setTables] = useState([]);
@@ -91,7 +91,7 @@ function BankTransfer({ prices, values, isLoading }) {
                         name="tables"
                         component="select"
                     >
-                        <option disabled key={"default"} value={0}>
+                        <option disabled key={"default"} value={""}>
                             --CHOOSE TABLE CATEGORIES--
                         </option>
                         {tables?.map((table) => (
@@ -109,7 +109,7 @@ function BankTransfer({ prices, values, isLoading }) {
                         name="table"
                         component="select"
                     >
-                        <option disabled key={"default"} value={0}>
+                        <option disabled key={"default"} value={""}>
                             --CHOOSE TABLE--
                         </option>
                         {table?.map((item) => (
@@ -124,15 +124,19 @@ function BankTransfer({ prices, values, isLoading }) {
                     {isLoading ? (
                         <ButtonLoading />
                     ) : (
-                        <Button
-                            className="bg-rose-600 rounded-none px-0 group"
-                            type="submit"
-                        >
-                            <span className="p-0 m-0 h-full bg-rose-800 flex items-center px-3 group-hover:bg-inherit">
-                                Rp{convertRupiah(Number(prices.total))}
-                            </span>
-                            <span className="p-0 m-0 px-3">Pay</span>
-                        </Button>
+                        !props.isSubmitting &&
+                        props.isValid &&
+                        props.dirty && (
+                            <Button
+                                className="bg-rose-600 rounded-none px-0 group"
+                                type="submit"
+                            >
+                                <span className="p-0 m-0 h-full bg-rose-800 flex items-center px-3 group-hover:bg-inherit">
+                                    Rp{convertRupiah(Number(prices.total))}
+                                </span>
+                                <span className="p-0 m-0 px-3">Pay</span>
+                            </Button>
+                        )
                     )}
                 </div>
             </div>

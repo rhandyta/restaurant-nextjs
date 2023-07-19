@@ -9,8 +9,11 @@ import BankTransfer from "@/components/BankTransfer";
 import { useGetCart } from "../cart/useGetCart";
 import { UserContext } from "@/context/user-context";
 import { useStoreOrder } from "./useStoreOrder";
+import { toastError } from "@/components/ToastComponent";
+import { useRouter } from "next/navigation";
 
 function Page({ searchParams }) {
+    const router = useRouter();
     const getCart = useGetCart;
     const storeOrder = useStoreOrder;
     const { token } = useContext(UserContext);
@@ -23,22 +26,29 @@ function Page({ searchParams }) {
         payment_type: method,
         bank: "",
         notes: "",
-        tables: 0,
-        table: 0,
+        tables: "",
+        table: "",
         detail_orders: [],
     };
 
     const validationSchema = yup.object({
         payment_type: yup.string().required(),
-        bank: yup.string().nullable(),
+        bank: yup.string().required(),
+        tables: yup.string().required(),
         table: yup.string().required(),
         notes: yup.string().nullable(),
     });
 
-    const onSubmit = (values) => {
-        setIsLoading(true);
-        const orders = { ...values, detail_orders: [...cart.current] };
-        storeOrder(orders, token, setIsLoading);
+    const onSubmit = async (values) => {
+        try {
+            setIsLoading(true);
+            const orders = { ...values, detail_orders: [...cart.current] };
+            const response = await storeOrder(orders, token, setIsLoading);
+            console.log(response);
+            router.push(`/transaction/${response.data.order.transaction_id}`);
+        } catch (error) {
+            toastError(error);
+        }
     };
 
     const handleChangeMethod = (method) => {
@@ -205,6 +215,7 @@ function Page({ searchParams }) {
                                             <BankTransfer
                                                 prices={searchParams}
                                                 values={props.values}
+                                                props={props}
                                                 isLoading={isLoading}
                                             />
                                         ) : (

@@ -20,7 +20,7 @@ export const useStoreOrder = async (order, token, setIsLoading) => {
         }
         setIsLoading(false);
         toastSuccess("Pay Success");
-        return console.log(true);
+        return response;
     } catch (error) {
         setIsLoading(false);
         toastError(error);
