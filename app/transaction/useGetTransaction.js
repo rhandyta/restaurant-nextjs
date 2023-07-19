@@ -14,9 +14,9 @@ export default async function useGetTransaction(token, setIsLoading) {
         );
         const response = await request.json();
         if (response.status_code !== 200) {
-            setIsLoading(false);
             throw Error("Something went wrong");
         }
+        setIsLoading(false);
         return response.data;
     } catch (error) {
         setIsLoading(false);

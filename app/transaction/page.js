@@ -34,12 +34,16 @@ export default function Transaction() {
                 Transaction List
             </h6>
             <section className="w-full mt-10 flex flex-col justify-center items-center gap-4 px-0 sm:px-20">
-                {transactions?.data?.map((transaction) => (
-                    <CardTransaction
-                        key={transaction.id}
-                        transaction={transaction}
-                    />
-                ))}
+                {isLoading ? (
+                    <div>Loading...</div>
+                ) : (
+                    transactions?.data?.map((transaction) => (
+                        <CardTransaction
+                            key={transaction.id}
+                            transaction={transaction}
+                        />
+                    ))
+                )}
             </section>
         </main>
     );
