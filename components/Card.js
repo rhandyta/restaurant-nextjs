@@ -6,6 +6,7 @@ import { convertRupiah } from "@/utils/utils";
 import { useStoreProductToCart } from "@/hooks/useStoreCart";
 import { UserContext } from "@/context/user-context";
 import ButtonLoading from "./ButtonLoading";
+import Link from "next/link";
 
 function Card({ food }) {
     const createProductToCart = useStoreProductToCart;
@@ -56,11 +57,22 @@ function Card({ food }) {
                     {isLoading ? (
                         <ButtonLoading className="rounded-2xl w-fit border-none btn-sm" />
                     ) : (
-                        <Button
-                            text="Buy Now"
-                            className="bg-rose-600 rounded-2xl w-fit border-none btn-sm"
-                            onClick={() => storeProductToCart(food.id)}
-                        />
+                        <>
+                            {!user ? (
+                                <Link
+                                    className="btn bg-rose-600 rounded-2xl w-fit border-none btn-sm"
+                                    href="/auth/login"
+                                >
+                                    Buy Now
+                                </Link>
+                            ) : (
+                                <Button
+                                    text="Buy Now"
+                                    className="bg-rose-600 rounded-2xl w-fit border-none btn-sm"
+                                    onClick={() => storeProductToCart(food.id)}
+                                />
+                            )}
+                        </>
                     )}
                 </div>
             </div>

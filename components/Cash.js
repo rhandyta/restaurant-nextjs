@@ -2,14 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import Label from "./Label";
 import Input from "./Input";
 import Button from "./Button";
-import { convertRupiah, staticMethodPayment } from "@/utils/utils";
+import { convertRupiah } from "@/utils/utils";
 import { UserContext } from "@/context/user-context";
 import { useGetTableCategories, useGetTable } from "@/hooks/useGetTables";
 import ErrorMessageField from "./ErrorMessageField";
 import ButtonLoading from "./ButtonLoading";
 import { useFormikContext } from "formik";
 
-function BankTransfer({ prices, isLoading, props }) {
+function Cash({ prices, isLoading, props }) {
     const { token = null } = useContext(UserContext);
 
     const { values, setFieldValue } = useFormikContext();
@@ -58,28 +58,6 @@ function BankTransfer({ prices, isLoading, props }) {
     return (
         <div className="w-full h-full flex gap-x-10">
             <div className="w-full">
-                <div>
-                    <Label label="CHOOSE BANK" />
-                    <Input
-                        className="select select-secondary select-sm w-full font-semibold uppercase text-rose-600"
-                        component="select"
-                        name="bank"
-                    >
-                        <option disabled key={"default"} value={""}>
-                            --CHOOSE BANK VA--
-                        </option>
-                        {staticMethodPayment.bank_transfer.map((value) => (
-                            <option
-                                key={value.id}
-                                value={value.bank}
-                                className="font-semibold"
-                            >
-                                {value.bank}
-                            </option>
-                        ))}
-                    </Input>
-                    <ErrorMessageField name="bank" />
-                </div>
                 <div>
                     <Label label="NOTES" />
                     <Input
@@ -153,4 +131,4 @@ function BankTransfer({ prices, isLoading, props }) {
     );
 }
 
-export default BankTransfer;
+export default Cash;
