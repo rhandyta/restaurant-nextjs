@@ -144,7 +144,7 @@ function Page({ params }) {
                                     Tanggal Transaction:{" "}
                                     <span className="font-semibold">
                                         {moment(transDetail.created_at).format(
-                                            "D MMMM YYYY, kk:mm A"
+                                            "D MMMM YYYY, kk:mm"
                                         )}
                                     </span>
                                 </p>
@@ -161,7 +161,7 @@ function Page({ params }) {
                                     Paid of Date:{" "}
                                     <span className="font-semibold">
                                         {moment(transDetail.updated_at).format(
-                                            "D MMMM YYYY, kk:mm A"
+                                            "D MMMM YYYY, kk:mm"
                                         )}
                                     </span>
                                 </p>
