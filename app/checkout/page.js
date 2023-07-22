@@ -1,7 +1,7 @@
 "use client";
 import ButtonIcon from "@/components/ButtonIcon";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Form, Formik, useFormikContext } from "formik";
+import { Form, Formik } from "formik";
 import * as yup from "yup";
 import HeaderRes from "@/components/HeaderRes";
 import CreditCard from "@/components/CreditCard";
@@ -18,7 +18,6 @@ function Page({ searchParams }) {
     const storeOrder = useStoreOrder;
     const { token } = useContext(UserContext);
 
-    // const [method, setMethod] = useState("bank_transfer");
     const [isLoading, setIsLoading] = useState(false);
 
     const cart = useRef([]);
@@ -40,37 +39,20 @@ function Page({ searchParams }) {
         notes: yup.string().nullable(),
     });
 
-    const onSubmit = async (values, props) => {
+    const onSubmit = async (values) => {
         try {
             setIsLoading(true);
             const orders = {
                 ...values,
                 detail_orders: [...cart.current],
             };
-            console.log({ orders });
-            // const response = await storeOrder(orders, token, setIsLoading);
-            // router.push(`/transaction/${response.data.order.transaction_id}`);
+            const response = await storeOrder(orders, token, setIsLoading);
+            router.push(`/transaction/${response.data.order.transaction_id}`);
             setIsLoading(false);
         } catch (error) {
             return false;
         }
     };
-
-    // const handleChangeMethod = (method) => {
-    //     switch (method) {
-    //         case "bank_transfer":
-    //             setMethod("bank_transfer");
-    //             break;
-    //         case "credit_card":
-    //             setMethod("credit_card");
-    //             break;
-    //         case "ewallet":
-    //             setMethod("ewallet");
-    //             break;
-    //         default:
-    //             setMethod("cash");
-    //     }
-    // };
 
     useEffect(() => {
         if (token) {
