@@ -48,7 +48,6 @@ function Page({ params }) {
                 unsubscribe(user?.id);
             };
         }
-        console.log('keluar diluar', transDetail)
     }, [token, user, params.transaction_id]);
 
     useEffect(() => {
@@ -223,7 +222,7 @@ function Page({ params }) {
                                 <p>
                                     Payment Method:{" "}
                                     <span className="font-semibold uppercase">
-                                        {transDetail.bank ? transDetail.bank : '-'}
+                                        {transDetail.bank ? transDetail.bank : transDetail.payment_type}
                                     </span>
                                 </p>
                                 <p>
