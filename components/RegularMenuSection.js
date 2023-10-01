@@ -38,7 +38,7 @@ function RegularMenuSection() {
                 </div>
             </div>
 
-            <div className="mt-36 flex flex-wrap gap-28 place-content-between">
+            <div className="mt-36 flex flex-wrap gap-28 place-content-center">
                 {regularMenus.map((food) => {
                     return <Card key={food.id} food={food} />;
                 })}

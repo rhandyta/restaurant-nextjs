@@ -7,7 +7,7 @@ import useGetTransaction from "./useGetTransaction";
 import Pusher from 'pusher-js'
 
 const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY, {
-    cluster: process.env.NEXT_PUBLIC_PUSHER.CLUSTER
+    cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER
 })
 
 export default function Transaction() {
@@ -19,6 +19,10 @@ export default function Transaction() {
 
     useEffect(() => {
         pusher.logToConsole = true;
+		var channel = pusher.subscribe("order");
+		channel.bind("order-event", function (data) {
+			alert(JSON.stringify(data));
+		});
         if (token) {
             getTransaction(token, setIsLoading)
                 .then((res) => {

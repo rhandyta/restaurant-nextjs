@@ -29,10 +29,10 @@ function HeroSection() {
                     <div className="flex flex-row gap-2">
                         <Button className="bg-red-600 border-0 rounded-3xl">
                             <Image
-                                src="/images/svg/bag.svg"
+                                src="/images/svg/basket.svg"
                                 height={30}
                                 width={30}
-                                alt="bag"
+                                alt="love"
                                 className="bg-yellow-400 rounded-full p-1"
                             />
                             <span className="ml-2 capitalize font-bold text-base">

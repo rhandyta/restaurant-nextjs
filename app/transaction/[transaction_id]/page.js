@@ -7,26 +7,57 @@ import Image from "next/image";
 import { convertRupiah } from "@/utils/utils";
 import moment from "moment";
 import StatusTransaction from "@/components/StatusTransaction";
+import Pusher from 'pusher-js'
 
 function Page({ params }) {
+    
     const [transDetail, setTransDetail] = useState({});
+    const [dataPusher, setDataPusher] = useState(null)
     const [isLoading, setIsLoading] = useState(false);
-    const { token } = useContext(UserContext);
+    const { token, user } = useContext(UserContext);
     const transactionDetail = useTransactionDetail;
 
     useEffect(() => {
-        if (token) {
-            transactionDetail(params.transaction_id, token, setIsLoading)
-                .then((res) => {
-                    setTransDetail(res);
-                })
-                .catch((error) => {
-                    setTransDetail({});
-                });
-        } else {
-            setTransDetail({});
+      if (token) {
+        transactionDetail(params.transaction_id, token, setIsLoading)
+            .then((res) => {
+                setTransDetail(res);
+            })
+            .catch((error) => {
+                setTransDetail({});
+            });
         }
-    }, [token]);
+
+        if (user) {
+            const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY, {
+                authEndpoint: `${process.env.NEXT_PUBLIC_API_HOST}pusher/auth`,
+                cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER,
+            });
+
+            const unsubscribe = (userId) => {
+                pusher.unsubscribe("private-transaction." + userId);
+            };
+
+            const channel = pusher.subscribe("private-transaction." + user.id);
+            channel.bind("transaction-event", function (res) {
+                let response = res.transaction
+                setDataPusher(response)
+            });
+
+            return () => {
+                unsubscribe(user?.id);
+            };
+        }
+        console.log('keluar diluar', transDetail)
+    }, [token, user, params.transaction_id]);
+
+    useEffect(() => {
+      if(dataPusher) {
+        setTransDetail({...transDetail, transaction_status: dataPusher.transaction_status})
+      }
+    }, [dataPusher])
+
+
     return (
         <main>
             <div className="bg-rose-100 px-20 w-full m-0">
@@ -192,13 +223,13 @@ function Page({ params }) {
                                 <p>
                                     Payment Method:{" "}
                                     <span className="font-semibold uppercase">
-                                        {transDetail.bank}
+                                        {transDetail.bank ? transDetail.bank : '-'}
                                     </span>
                                 </p>
                                 <p>
                                     Payment VA:{" "}
                                     <span className="font-semibold uppercase">
-                                        {transDetail.va_number}
+                                        {transDetail.va_number ? transDetail : '-'}
                                     </span>
                                 </p>
                             </div>

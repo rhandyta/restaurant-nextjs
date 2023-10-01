@@ -35,7 +35,7 @@ function BestCategorySection() {
                 </div>
             </div>
             <div className="mt-10">
-                <div className="flex flex-wrap justify-between">
+                <div className="flex flex-wrap justify-center">
                     {bestCategories.map((food) => {
                         return (
                             <CardBestCategory key={food.id} product={food} />
