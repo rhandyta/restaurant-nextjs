@@ -37,17 +37,17 @@ function Cart() {
     }, [cart]);
     return (
         <main>
-            <div className="bg-rose-100 px-20 w-full m-0">
+            <div className="bg-rose-100 px-0 md:px-20 w-full m-0">
                 <HeaderRes />
             </div>
-            <section className="px-20 w-full mt-10">
-                <div className="w-full min-h-96 flex justify-between">
-                    <div className="w-[75%] min-h-full">
+            <section className="px-0 md:px-20 w-full mt-10">
+                <div className="w-full min-h-96 flex flex-col md:flex-row justify-between">
+                    <div className="w-full md:w-[75%] min-h-full">
                         <div className="overflow-y-auto h-96 ">
                             <Table />
                         </div>
                     </div>
-                    <div className="w-[20%] min-h-max h-fit flex flex-col justify-between">
+                    <div className="w-full md:w-[20%] min-h-max h-fit flex flex-col justify-between">
                         <div className="bg-rose-200 h-[35%] flex flex-col justify-center p-5">
                             <p>Have a coupon?</p>
                             <div className="flex mt-2">

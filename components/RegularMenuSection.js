@@ -21,12 +21,12 @@ function RegularMenuSection() {
         getRegularMenu();
     }, []);
     return (
-        <section className="pt-20 px-20 pb-96">
+        <section className="pt-20 px-10 md:px-20 pb-96">
             <div>
-                <h6 className="text-5xl font-bold">
+                <h6 className="text-3xl md:text-5xl font-bold">
                     Our <span className="text-rose-600">REGULAR</span> Menu
                 </h6>
-                <div className="flex justify-between items-center mt-7">
+                <div className="flex justify-between items-center mt-2 md:mt-1">
                     <p className="text-slate-400 w-72">
                         These Are Our Regular Menus. You Can Order Anything You
                         Like.

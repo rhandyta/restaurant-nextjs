@@ -4,9 +4,9 @@ import Button from "./Button";
 function HeroSection() {
     return (
         <section className="hero bg-rose-100">
-            <div className="hero-content w-full flex-col lg:flex-row items-start justify-between my-5">
+            <div className="hero-content w-full flex-col md:flex-row items-center justify-between my-5">
                 <div className="flex flex-col gap-10">
-                    <h5 className="text-5xl font-bold text-red-500 leading-snug">
+                    <h5 className="text-3xl lg:text-5xl font-bold text-red-500 leading-snug">
                         All Fast Food is
                         <br /> Available at Foodle
                     </h5>
@@ -53,12 +53,13 @@ function HeroSection() {
                         </Button>
                     </div>
                 </div>
-                <figure>
+                <figure className="mt-5 lg:mt-0">
                     <Image
                         src="/images/svg/hamburger.svg"
                         width={300}
                         height={300}
                         alt="avatar"
+                        className="w-36 h-36 lg:w-52 lg:h-52"
                     />
                 </figure>
             </div>

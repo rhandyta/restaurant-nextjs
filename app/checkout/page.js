@@ -70,11 +70,11 @@ function Page({ searchParams }) {
 
     return (
         <main>
-            <div className="bg-rose-100 px-20 w-full m-0">
+            <div className="bg-rose-100 px-0 md:px-20 w-full m-0">
                 <HeaderRes />
             </div>
             <section className="w-full mt-10 flex justify-center items-center">
-                <div className="card w-4/6 h-fit bg-rose-100 shadow-xl">
+                <div className="card w-full md:w-4/6 h-fit bg-rose-100 rounded-none md:rounded-xl shadow-xl">
                     <Formik
                         initialValues={initialValues}
                         onSubmit={onSubmit}
