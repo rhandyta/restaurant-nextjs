@@ -165,7 +165,7 @@ function Page({ params }) {
                                     <span className="font-semibold uppercase">
                                         <StatusTransaction
                                             status={
-                                                transDetail.transaction_status
+                                                transDetail?.transaction_status
                                             }
                                         />
                                     </span>
@@ -173,7 +173,7 @@ function Page({ params }) {
                                 <p>
                                     Tanggal Transaction:{" "}
                                     <span className="font-semibold">
-                                        {moment(transDetail.created_at).format(
+                                        {moment(transDetail?.created_at).format(
                                             "D MMMM YYYY, kk:mm"
                                         )}
                                     </span>
@@ -190,7 +190,7 @@ function Page({ params }) {
                                 <p>
                                     Paid of Date:{" "}
                                     <span className="font-semibold">
-                                        {moment(transDetail.updated_at).format(
+                                        {moment(transDetail?.updated_at).format(
                                             "D MMMM YYYY, kk:mm"
                                         )}
                                     </span>
@@ -200,7 +200,7 @@ function Page({ params }) {
                                     <span className="font-semibold">
                                         Rp
                                         {convertRupiah(
-                                            Number(transDetail.gross_amount) -
+                                            Number(transDetail?.gross_amount) -
                                                 Number(transDetail.amount)
                                         )}
                                     </span>
@@ -210,7 +210,7 @@ function Page({ params }) {
                                     <span className="font-semibold">
                                         Rp
                                         {convertRupiah(
-                                            Number(transDetail.gross_amount)
+                                            Number(transDetail?.gross_amount)
                                         )}
                                     </span>
                                 </p>
@@ -222,13 +222,13 @@ function Page({ params }) {
                                 <p>
                                     Payment Method:{" "}
                                     <span className="font-semibold uppercase">
-                                        {transDetail.bank ? transDetail.bank : transDetail.payment_type}
+                                        {transDetail.bank ? transDetail?.bank : transDetail?.payment_type}
                                     </span>
                                 </p>
                                 <p>
                                     Payment VA:{" "}
                                     <span className="font-semibold uppercase">
-                                        {transDetail.va_number ? transDetail : '-'}
+                                        {transDetail?.va_number ? transDetail.va_number : '-'}
                                     </span>
                                 </p>
                             </div>

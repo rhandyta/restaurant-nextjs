@@ -27,7 +27,7 @@ function BestCategorySection() {
                         Best <span className="text-rose-600">TOP</span> Selling
                     </h6>
                 </div>
-                <div className="w-1/2md:w-72">
+                <div className="w-1/2 md:w-72">
                     <p className="text-slate-400 antialiased">
                         Here Are Some Of Our Best Distributed Categories. If You
                         Want You Can Order From Here.
