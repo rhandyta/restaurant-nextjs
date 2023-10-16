@@ -4,11 +4,6 @@ import HeaderRes from "@/components/HeaderRes";
 import { UserContext } from "@/context/user-context";
 import { useContext, useEffect, useState } from "react";
 import useGetTransaction from "./useGetTransaction";
-import Pusher from 'pusher-js'
-
-const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY, {
-    cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER
-})
 
 export default function Transaction() {
     const { token } = useContext(UserContext);
@@ -18,11 +13,6 @@ export default function Transaction() {
     const getTransaction = useGetTransaction;
 
     useEffect(() => {
-        pusher.logToConsole = true;
-		var channel = pusher.subscribe("order");
-		channel.bind("order-event", function (data) {
-			alert(JSON.stringify(data));
-		});
         if (token) {
             getTransaction(token, setIsLoading)
                 .then((res) => {

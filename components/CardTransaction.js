@@ -5,10 +5,10 @@ import StatusTransaction from "./StatusTransaction";
 
 export default function CardTransaction({ transaction }) {
     const createTransaction = moment(transaction.created_at).locale("id");
-
+    console.log(transaction)
     return (
-        <div className="w-full h-40 bg-rose-100 rounded-md shadow-md p-4 flex flex-col justify-between">
-            <div className="flex gap-3 items-center">
+        <div className="w-full h-80 md:h-40 bg-rose-100 rounded-md shadow-md p-4 flex flex-col justify-between">
+            <div className="flex gap-3  flex-col md:flex-row items-center">
                 <div className="font-bold text-lg">
                     <p>{transaction.order_id}</p>
                 </div>
@@ -27,15 +27,15 @@ export default function CardTransaction({ transaction }) {
                 </div>
             </div>
             <div className="grid grid-cols-6 gap-0 divide-x-2 divide-rose-200">
-                <div className="col-span-5">
+                <div className="col-span-4 md:col-span-5">
                     <div className="font-bold text-lg">
                         <p>Tagihan</p>
                     </div>
                     <div className="text-slate-500 uppercase">
-                        <p>{`${transaction.bank} ${transaction.va_number}`}</p>
+                        <p>{transaction.bank ? transaction?.bank : transaction?.payment_type}   {transaction?.va_number ? transaction.va_number : ''}</p>
                     </div>
                 </div>
-                <div className="pl-3">
+                <div className="pl-3 col-auto">
                     <div className="text-slate-500">
                         <p>Total Price</p>
                     </div>
